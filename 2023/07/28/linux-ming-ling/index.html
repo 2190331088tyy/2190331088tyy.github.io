@@ -1,0 +1,2404 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>Linux常用命令 | 木亶</title>
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  
+  
+    <script>
+        var themeModelId = '';
+        if (themeModelId) {
+            localStorage.setItem('modelId', themeModelId);
+        }
+    </script>
+    
+    <script defer src="https://cdn.jsdelivr.net/gh/yuang01/live2d-widget@latest/autoload.js"></script>
+    <script>
+        var live2dOpen = eval('true') || false;
+        if (!live2dOpen) {
+            localStorage.setItem('waifu-display', 1609323474481);
+        }
+    </script>
+  
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+    
+    <!-- 依赖于jquery和vue -->
+    
+        <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+    
+
+    
+        <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+    
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+  
+  <!-- 预加载动画 -->
+  <!-- 页面预加载动画 -->
+
+  
+    <div class="preloader_2" id="loader">
+  <div class="loader"></div>
+</div>
+
+  
+<script>
+  var endLoading = function () {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loader').classList.add("loading");
+  }
+  window.addEventListener('DOMContentLoaded',endLoading);
+</script>
+
+  <body>
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+  function loadScript(src, cb) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+
+  //https://github.com/filamentgroup/loadCSS
+  var loadCSS = function (src) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  };
+
+</script> 
+
+<!-- 轮播图所需要的js -->
+<script src="/js/swiper/swiper.min.js"></script>
+<script src="/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+<script type="text/javascript">
+  Vue.use(window.VueAwesomeSwiper)
+</script>
+
+
+  <script src="/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://unpkg.com/typed.js@2.0.11"></script>
+
+
+    <div id="safearea">
+      <main class="main" id="pjax-container">
+        <!-- 头部导航 -->
+        
+<header class="header  " 
+  id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <h3 class="drawer-box-head_title">木亶</h3>
+      <h5 class="drawer-box-head_desc">选择有时候比努力更重要</h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                  
+                  <span class="name">首页</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/archives" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-archive" aria-hidden="true"></i>
+                  
+                  <span class="name">归档</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/tags" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-tags" aria-hidden="true"></i>
+                  
+                  <span class="name">标签</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/categories" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">分类</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/friends" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-link" aria-hidden="true"></i>
+                  
+                  <span class="name">友情链接</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/" class="drawer-menu-item-link">
+                  
+                  <span class="name">children</span>
+                </a>
+              
+            </li>
+          
+        
+        
+          <li class="drawer-box-content_item">
+            <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo">
+              <i class="fas fa-github" aria-hidden="true"></i>
+              <span>Github</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+        </div>
+      
+      <a href="/" class="logo">木亶</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/" class="menu-item-link" title="首页">
+                  
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                  
+                  <span class="name">首页</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/archives" class="menu-item-link" title="归档">
+                  
+                    <i class="fas fa-archive" aria-hidden="true"></i>
+                  
+                  <span class="name">归档</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/tags" class="menu-item-link" title="标签">
+                  
+                    <i class="fas fa-tags" aria-hidden="true"></i>
+                  
+                  <span class="name">标签</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/categories" class="menu-item-link" title="分类">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">分类</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/friends" class="menu-item-link" title="友情链接">
+                  
+                    <i class="fas fa-link" aria-hidden="true"></i>
+                  
+                  <span class="name">友情链接</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/" class="menu-item-link" title="children">
+                  
+                  <span class="name">children</span>
+                </a>
+              
+            </li>
+          
+        
+      </ul>
+      
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <h2>
+          <span>
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="title">本地搜索</span>
+          </span>
+          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="请输入关键字"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+      window.addEventListener('pjax:complete', () => {
+        this.cancelDialogVisible();
+      })
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+    <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+  
+    <div id="he-plugin-simple"></div>
+    <script>
+      WIDGET = {
+        CONFIG: {
+          "modules": "012",
+          "background": 5,
+          "tmpColor": "4A4A4A",
+          "tmpSize": 16,
+          "cityColor": "4A4A4A",
+          "citySize": 16,
+          "aqiSize": 16,
+          "weatherIconSize": 24,
+          "alertIconSize": 18,
+          "padding": "10px 10px 10px 10px",
+          "shadow": "1",
+          "language": "auto",
+          "borderRadius": 5,
+          "fixed": "false",
+          "vertical": "middle",
+          "horizontal": "center",
+          "key": "2784dd3fcb1e4f0f9a9b579bf69641f2"
+        }
+      }
+    </script>
+    <script defer src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script> 
+    
+</header>
+        <!-- 内容区域 -->
+        
+ <!-- prismjs 代码高亮 -->
+ 
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        Linux常用命令
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2023-07-28 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/Linux/" class="post-detail-header_category">
+              Linux
+            </a>
+          
+        </span>
+      
+
+      
+    
+  </div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <h1 id="常见命令"><a href="#常见命令" class="headerlink" title="常见命令"></a>常见命令</h1><p><strong>查看帮助手册</strong></p>
+<p>使用 man(manual) 命令可以查看 Linux 内置的帮助手册。该手册分为多卷：第一卷是用来查看 shell 命令的；第二卷是用来查看系统调用相关信息的；第三卷是用来查看库函数信息的…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1   可执行程序或 shell 命令</span><br><span class="line">2   系统调用(内核提供的函数)</span><br><span class="line">3   库调用(程序库中的函数)</span><br><span class="line">4   特殊文件(通常位于 /dev)</span><br><span class="line">5   文件格式和规范，如 /etc/passwd</span><br><span class="line">6   游戏</span><br><span class="line">7   杂项(包括宏包和规范，如 man(7)，groff(7))</span><br><span class="line">8   系统管理命令(通常只针对 root 用户)</span><br><span class="line">9   内核例程 [非标准</span><br></pre></td></tr></table></figure>
+
+<p>man命令的格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ man [手册编号] cmd</span><br><span class="line">$ man man</span><br><span class="line">$ man 3 mkdir</span><br></pre></td></tr></table></figure>
+
+<p>进入帮助界面后，我们可以按下面按键浏览帮助信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">d(down): 往下翻半页</span><br><span class="line">u(up): 往上翻半页</span><br><span class="line">f(forward): 往下翻一整页</span><br><span class="line">b(backward):往上翻一整页</span><br><span class="line">q(quit): 退出</span><br></pre></td></tr></table></figure>
+
+<p><strong>关机命令</strong></p>
+<p>关闭主机之前，请务必先关闭虚拟机！否则，可能会损坏虚拟机文件，导致不能启动虚拟机。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ man shutdown</span><br><span class="line"> shutdown - 挂起，关机或重启计算机</span><br><span class="line">常用选项：</span><br><span class="line"> -H, --halt: 挂起</span><br><span class="line"> -P, --poweroff: 关机(默认)</span><br><span class="line"> -r, --reboot: 重启</span><br><span class="line"> -c(cancel): 取消</span><br><span class="line"> </span><br><span class="line"> $ sudo shutdown</span><br><span class="line"> 广播关机消息给所有用户，并于一分钟后关机。</span><br><span class="line">$ sudo shutdown now</span><br><span class="line"> 立刻关机</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-用户子系统"><a href="#1-用户子系统" class="headerlink" title="1.用户子系统"></a>1.用户子系统</h2><p>Linux 用户可以分为：超级用户(root)和普通用户。超级用户又被称为：根用户和特权用户，它拥有至高无上的权利。普通用户又被划分为管理用户和其它用户。管理用户即我们俗称的 sudoers，他们可以临时提升权限(使用sudo命令)，安装Ubuntu过程中创建的用户默认就是 sudoers。</p>
+<p><strong>查看所有用户</strong></p>
+<p>Linux系统下的所有用户，在 passwd 配置文件中都有一条相关记录。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cat /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">...</span><br><span class="line">he:x:1000:1000:he,,,:/home/he:/bin/bash</span><br><span class="line"></span><br><span class="line">//每一行对应一条记录，每条记录有多个字段，字段之间以 : 分割。我们可以在5号手</span><br><span class="line">册中查看 passwd 文件的格式和规范：</span><br><span class="line">$ man 5 passwd</span><br><span class="line">/etc/passwd 为每个用户账户包含一行，包含使用冒号 (“:”) 分隔的七个字段，分别是：</span><br><span class="line"> ·   登录名</span><br><span class="line"> ·   可选的加密后的密码</span><br><span class="line"> ·   数字用户 ID</span><br><span class="line"> ·   数字组 ID</span><br><span class="line"> ·   用户名和注释字段</span><br><span class="line"> ·   用户主目录</span><br><span class="line"> ·   可选的用户命令解释器</span><br></pre></td></tr></table></figure>
+
+<p><strong>添加用户</strong></p>
+<p>使用useradd命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">    useradd [选项] username</span><br><span class="line">    常用的选项：</span><br><span class="line">    -m, --create-home   如果不存在则创建用户的主目录</span><br><span class="line">    -s, --shell         用户的登录shell名</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd test1 </span><br><span class="line"> 这样的创建该用户不会创建主目录，默认的shell为sh</span><br><span class="line">sudo useradd -m -s /bin/bash test2</span><br><span class="line"> 这样的创建该用户会创建主目录，并且指定了使用/bin/bash shell</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除用户</strong></p>
+<p>使用userdel命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	userdel [选项] username</span><br><span class="line">常用选项：</span><br><span class="line">    -r.--remove      用户主目录中的文件将随主目录和用户邮箱一起删除</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo userdel test1</span><br><span class="line">	不会删除用户的家目录和用户的邮箱</span><br><span class="line">sudo userdel -r </span><br><span class="line">	会把用户的家目录和用户的邮箱一起删除</span><br></pre></td></tr></table></figure>
+
+<p><strong>设置密码</strong></p>
+<p>使用passwd命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	passwd [选项] [username]  </span><br><span class="line">	可以更改用户密码，普通用户只能修改自己的密码，超级用户则可以修改任意用户的密码</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd test1</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>切换用户</strong></p>
+<p>使用su(switch user)命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	su [选项] [username]</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sude su  切换到su用户</span><br></pre></td></tr></table></figure>
+
+<p><strong>退出切换</strong></p>
+<p>使用exit命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">exit    退出用户切换</span><br></pre></td></tr></table></figure>
+
+<p>ps: </p>
+<p>使用su命令依次切换到多个用户的时候，这些用户时使用栈结构来管理的。执行su命令相当于将用户压入栈顶，执行exit命令相当于将用户弹出栈顶。</p>
+<p>当用户在上述的栈结构中存在的时候，该用户是不能被删除的。</p>
+<h2 id="2-文件子系统"><a href="#2-文件子系统" class="headerlink" title="2.文件子系统"></a>2.文件子系统</h2><h3 id="2-1目录相关命令"><a href="#2-1目录相关命令" class="headerlink" title="2.1目录相关命令"></a>2.1目录相关命令</h3><p>和 Windows 不一样，Linux是以树的结构来管理文件系统的。我们将树的根结点称为根目录，用 &#x2F; 表示。</p>
+<p><strong>常见目录</strong></p>
+<p>在Linux中，我们是以分门别类的方式来管理文件的，也就是说，我们会将功能相似的文件放到同一个目录下进行管理。这和Windows按工程组织文件的方式不太一样。</p>
+<p>常见目录的功能如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>目录名</strong></th>
+<th align="center"><strong>功能</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">&#x2F;bin(binary)</td>
+<td align="center">存放可执行程序或脚本文件</td>
+</tr>
+<tr>
+<td align="center">&#x2F;sys(system)</td>
+<td align="center">存放和系统相关的文件</td>
+</tr>
+<tr>
+<td align="center">&#x2F;dev(device)</td>
+<td align="center">存放设备文件</td>
+</tr>
+<tr>
+<td align="center">&#x2F;etc</td>
+<td align="center">一般用来存放配置文件和启动脚本</td>
+</tr>
+<tr>
+<td align="center">&#x2F;lib(library)</td>
+<td align="center">存放系统库文件</td>
+</tr>
+<tr>
+<td align="center">&#x2F;var(variable)</td>
+<td align="center">存放变化很快的文件，比如日志文件</td>
+</tr>
+<tr>
+<td align="center">&#x2F;proc(process)</td>
+<td align="center">存放进程相关的数据</td>
+</tr>
+<tr>
+<td align="center">&#x2F;root</td>
+<td align="center">root用户的家目录</td>
+</tr>
+<tr>
+<td align="center">&#x2F;home&#x2F;{username}</td>
+<td align="center">普通用户的家目录</td>
+</tr>
+</tbody></table>
+<p><strong>查看当前工作目录</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pwd</span><br></pre></td></tr></table></figure>
+
+<p><strong>改变当前目录</strong></p>
+<p>使用cd(change directory)命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	cd [选项] [directory]</span><br></pre></td></tr></table></figure>
+
+<p>常用方式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cd # 切换到用户家目录</span><br><span class="line">$ cd /usr/lib # 切换到/usr/lib目录</span><br><span class="line">$ cd / # 切换到 / 目录</span><br><span class="line">$ cd ~ # 切换到用户家目录</span><br><span class="line">$ cd . # 切换到当前工作目录(不切换)</span><br><span class="line">$ cd .. # 切换到父目录</span><br><span class="line">$ cd - # 切换到上一次目录</span><br></pre></td></tr></table></figure>
+
+<p>注意：上一次目录保存在环境变量OLDPWD中(可以通过env命令查看)，它不是用栈结构管理的。</p>
+<p><strong>创建目录</strong></p>
+<p>使用mkdir命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	mkdir [选项] directory...</span><br><span class="line">常用选项：</span><br><span class="line"> -p, --parents         如果父目录不存在，则创建父目录</span><br></pre></td></tr></table></figure>
+
+<p>常用方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir dir</span><br><span class="line">$ mkdir dir1 dir2 dir3</span><br><span class="line">$ mkdir -p a/b/c</span><br></pre></td></tr></table></figure>
+
+<p>删除空目录：</p>
+<p>使用rmdir(只能删除空目录)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line"> rmdir [选项] dirctory...</span><br><span class="line">常用选项：</span><br><span class="line"> -p, --parents</span><br><span class="line">   递归删除空目录</span><br></pre></td></tr></table></figure>
+
+<p>常用方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ rmdir dir</span><br><span class="line">$ rmdir dir1 dir2 dir3</span><br><span class="line">$ rmdir -p a/b/c</span><br></pre></td></tr></table></figure>
+
+<p><strong>通配符</strong></p>
+<p>可以匹配单个或多个字符。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">*: 匹配任意多个字符(包括0个)</span><br><span class="line">?: 匹配任意一个字符</span><br><span class="line">集合(类): [characters]匹配集合内任意一个字符。</span><br><span class="line"> 		 [!characters]匹配集合外任意一个字符。</span><br><span class="line">比如：[abc], [!abc], [0-9], [a-z], [0-9A-Za-z_]等</span><br></pre></td></tr></table></figure>
+
+<p>rmdir命令可以和通配符一起使用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ rmdir dir?</span><br><span class="line">$ rmdir dir*</span><br><span class="line">$ rmdir [!abc]</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看目录内容</strong></p>
+<p>ls命令可以查看目录内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	ls[选项] [FILE]...</span><br><span class="line">常用选项：</span><br><span class="line">	-a,--all  显示所有的内容，包括以.开头的文件和目录</span><br><span class="line">	-i，--inode  显示文件的inode编号(inode是物理文件的标识)。</span><br><span class="line">	-l      以长格式的形式显示目录中的内容</span><br><span class="line">	-h,  --human-readable   和-l一起使用，以人类可读的方式显示文件的大小。</span><br></pre></td></tr></table></figure>
+
+<p>常用方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ ls # 查看当前工作目录</span><br><span class="line">$ ls dir # 查看dir</span><br><span class="line">$ ls dir1 dir2 dir3 # 查看dir1,dir2,dir3</span><br><span class="line">$ ls -a dir # 查看dir中的所有内容，包括以.开头的文件和目录</span><br><span class="line">$ ls -ilh dir # 显示inode编号，显示详细信息，并以人类可读的方式显示文</span><br><span class="line">件的大小</span><br></pre></td></tr></table></figure>
+
+<p>目录的详细信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l</span><br><span class="line">总用量 8560</span><br><span class="line">-rw-rw-r--  1 he he 4349666 3月   7 11:12 a.txt</span><br><span class="line">drwxrwxr-x  2 he he    4096 3月   2 21:18 c</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>第一列的第一个字母表示文件的类型。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">-: 普通文件</span><br><span class="line">d(directory): 目录</span><br><span class="line">c(character): 字符设备文件(鼠标，键盘，显示器...)</span><br><span class="line">b(block): 块设备文件(磁盘)</span><br><span class="line">l(symbolic link): 符号链接</span><br><span class="line">s(socket): 本地套接字</span><br><span class="line">p(named pipe): 有名管道</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>第1列后面九个字符(分为3组)表示权限。依次代表拥有者、拥有组和其他用户的读、写、执行权限。可读则显示r，可写则显示w，可执行则显示x， 没有相关权限则显示-。</p>
+</li>
+<li><p>第2列表示硬链接数。</p>
+</li>
+<li><p>第3列表示拥有者。</p>
+</li>
+<li><p>第4列表示拥有组。</p>
+</li>
+<li><p>第5列表示文件所占空间的大小。</p>
+</li>
+<li><p>第6列表示最近修改时间。</p>
+</li>
+<li><p>第7列为文件名。</p>
+</li>
+</ul>
+<p><strong>复制文件和目录</strong></p>
+<p>cp命令可以用来复制文件和目录。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	cp [选项] SOURCE DEST</span><br><span class="line">	cp [选项] SOURCE ...DEST</span><br><span class="line">常用选项：</span><br><span class="line">	-n, --no-clobber   如果文件已存在，则不覆盖（默认会覆盖已有文件）。</span><br><span class="line">	-i, --interactive  如果文件存在，则给用户提示信息（由用户决定是否覆盖）。</span><br><span class="line">	-R, -r, --recursive  递归复制（用于copy目录）。</span><br></pre></td></tr></table></figure>
+
+<p>常用方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cp text1 text2 # 将text1复制到text2中；如果text2存在，</span><br><span class="line">则覆盖。</span><br><span class="line">$ cp text1 text2 text3 dir # 将text1,text2,text3复制到目录dir中；</span><br><span class="line">如果文件已存在，则覆盖。</span><br><span class="line">$ cp -n text1 text2 # 将text1复制到text2中；如果text2存在，</span><br><span class="line">不覆盖。</span><br><span class="line">$ cp -i text1 text2 text3 dir # 将text1,text2,text3复制到目录dir中；</span><br><span class="line">如果文件已存在，则提示用户是否覆盖。</span><br><span class="line">$ cp -r dir1 dir2 # 递归地将目录dir1复制到目录dir2</span><br></pre></td></tr></table></figure>
+
+<p><strong>移动文件和目录</strong></p>
+<p>mv命令可以用来移动文件和目录，也可以用mv命令对文件和目录重命名。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	mv [选项] SOURCE DEST</span><br><span class="line">	mv [选项] SOUCE... DEST</span><br><span class="line">常用选项：</span><br><span class="line">  	-n, --no-clobber  如果文件已存在，则不覆盖（默认会覆盖已有文件）。</span><br><span class="line">  	-i ,--interactive  如果文件已存在，则会给用户提示信息（由用户决定）。</span><br></pre></td></tr></table></figure>
+
+<p>常用方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ mv text1 text2 # 将text1重命名为text2；如果text2存在，</span><br><span class="line">则覆盖。</span><br><span class="line">$ mv dir1 dir2 # 将dir1重命名为dir2</span><br><span class="line">$ mv -n text1 text2 # 将text1重命名为text2；如果text2存在，</span><br><span class="line">不覆盖。</span><br><span class="line">$ mv text1 text2 text3 dir # 将text1,text2,text3移动到目录dir中；</span><br><span class="line">如果文件已存在，则覆盖。</span><br><span class="line">$ mv -i text1 text2 text3 dir # 将text1,text2,text3移动到目录dir中；</span><br><span class="line">如果文件已存在，则提示用户是否覆盖。</span><br></pre></td></tr></table></figure>
+
+<p><strong>删除文件和目录</strong></p>
+<p>rm命令可以删除文件和目录。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	rm [选项] FILE...</span><br><span class="line">常用选项：</span><br><span class="line">	-f,--force   忽略不存在的文件，永不提示。</span><br><span class="line">	-i  在每次删除前，都提示用户是否删除</span><br><span class="line">	-r, -R ,--recursive   递归删除</span><br></pre></td></tr></table></figure>
+
+<p>常用方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ rm text1 # 删除文件text1</span><br><span class="line">$ rm text1 text2 text3 # 删除文件text1, text2, text3</span><br><span class="line">$ rm -i *.txt # 删除当前目录下所有以.txt结尾的文件，并提示用户是</span><br><span class="line">否删除</span><br><span class="line">$ rm -rf dir # 递归删除目录dir, 不给出任何提示</span><br></pre></td></tr></table></figure>
+
+<p>注意：使用rm命令删除文件和目录后，就很难恢复了(Linux系统没有所谓的回收**站)。所以除非必要，不要以 root 身份或者使用 sudo 权限来执行 rm 命令!</p>
+<h2 id="2-2文件相关命令"><a href="#2-2文件相关命令" class="headerlink" title="2.2文件相关命令"></a>2.2文件相关命令</h2><p><strong>创建文件</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ echo &quot;Hello Linus Torvalds&quot; &gt; text  # 创建文件text, 并且文件中包含内容&quot;Hello Linus Torvalds&quot;</span><br><span class="line">$ touch text1 text2 text3          # 创建空文件text1, text2, text3(要求text1,text2,text3不存在)</span><br><span class="line">$ vim hello.c         # 编辑hello.c, 按:wq退出。</span><br></pre></td></tr></table></figure>
+
+<p><strong>查找文件</strong></p>
+<ol>
+<li><p>使用which命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	which [-a] cmd</span><br><span class="line">选项：</span><br><span class="line">		-a      显示所有匹配路径</span><br></pre></td></tr></table></figure>
+
+<p>常用方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ which bash # 查看bash的路径</span><br><span class="line">$ which ls tree # 查看命令ls和tree的路径</span><br><span class="line">$ which -a vim # 查看vim的所有路径 (我们可能装了多个版本的vim)</span><br></pre></td></tr></table></figure>
+
+<p>which是根据PATH环境变量中的路径依次去查找的，然后显示第一个匹配项，或者显示所有匹配项。</p>
+<p>可以使用env命令查看环境。由：分隔开。</p>
+</li>
+<li><p>find命令可以在一个目录中递归的查找符合条件的文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	find [start-point...] 查找条件   # 省略start-point，默认起始点为当前工作目录</span><br></pre></td></tr></table></figure>
+
+<p>常用选项：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">	-name pattern 查找文件名符合pattern的文件</span><br><span class="line">	-type c      查找类型为c的文件：</span><br><span class="line">						b(block): 块设备文件</span><br><span class="line"> 						c(character): 字符设备文件</span><br><span class="line"> 						d(directory): 目录</span><br><span class="line"> 						p(named pipe): 有名管道</span><br><span class="line"> 						f(file): 普通文件</span><br><span class="line"> 						l(symbolic link): 符号链接</span><br><span class="line">						s(socket): 套接字</span><br><span class="line">	-size n[cwbkMG]</span><br><span class="line">				b: for 512-byte blocks (this is the default if no suffix isused)</span><br><span class="line">     			c: for bytes</span><br><span class="line">           		w: for two-byte words</span><br><span class="line">           		k: for Kibibytes (KiB, units of 1024 bytes)</span><br><span class="line"> 				M: for Mebibytes (MiB, units of 1024 * 1024 = 1048576 bytes)</span><br><span class="line">           		G: for Gibibytes (GiB, units of 1024 * 1024 * 1024 =1073741824 bytes)</span><br><span class="line">           		可以在n前面添加&#x27;+&#x27;和&#x27;-&#x27;，表示大于和小于。</span><br><span class="line">    -empty   查找空的文件或空的文件夹</span><br><span class="line">    -user username ,-uid uid    根据用户名和用户id查找</span><br><span class="line">    -group groupname ,-gid gid  根据组名和组id查找</span><br><span class="line">    -perm mode                  根据权限查找</span><br><span class="line">根据时间查找：</span><br><span class="line">	-amin n, -atime n, -cmin n, -mmin n, -mtime n</span><br><span class="line">			a(access):文件访问的时间</span><br><span class="line">			c(change):文件属性发生改变的时间</span><br><span class="line">			m(modify):文件内容发生改变的时间</span><br><span class="line">			min:以分钟为单位</span><br><span class="line">			time:以天为单位</span><br><span class="line">	可以在n前面添加&#x27;+&#x27;和&#x27;-&#x27;，表示大于和小于。</span><br><span class="line">组合查找：</span><br><span class="line">	-a(and), -o(or), !(not):分别表示与或非</span><br><span class="line">    </span><br></pre></td></tr></table></figure>
+
+<p>常用方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ find /usr/include -name &quot;stdio.h&quot; 				# 在/usr/include目录下查找stdio.h文件</span><br><span class="line">$ find . -name &quot;*.c&quot; 								# 在当前工作目录下查找所有以.c结尾的文件</span><br><span class="line">$ find /dev -type b 									# 在/dev目录下查找所有的块设备文件</span><br><span class="line">$ find . -size 5M 									# 在当前工作目录下查找所有大小为5M的文件</span><br><span class="line">$ find . -size +5M 									  # 在当前工作目录下查找所有大于5M的文件</span><br><span class="line">$ find dir1 dir2 dir3 -empty 			# 在dir1,dir2,dir3目录下查找所有空的文件和空的文件夹</span><br><span class="line">$ find . -user he 								  	  # 在当前工作目录下查找he用户拥有的文件</span><br><span class="line">$ find . -gid 0								 # 在当前工作目录下查找root组(gid=0)拥有的文件</span><br><span class="line">$ find . -perm 664 							# 在当前工作目录下查找权限为664(rwrw-r--)的文件</span><br><span class="line">$ find . -mtime 1 		# 在当前工作目录下查找在[1, 2)天前内容发生修改的文件 (find会省略小数部分)</span><br><span class="line">$ find . -mtime +2 						   # 在当前工作目录下查找在[3, )天前内容发生修改的文件</span><br><span class="line">$ find /dev -type c -a -name &quot;tty*&quot; 			   # 在/dev目录下查找以tty开头的字符设备文件</span><br><span class="line">$ find /dev -type b -o -name &quot;tty*&quot;		    # 在/dev目录下查找块设备文件或者是以tty开头的文件</span><br><span class="line">$ find /dev -type c -a ! -name &quot;tty*&quot; 			# 在/dev目录下查找不以tty开头的字符设备文件</span><br></pre></td></tr></table></figure>
+
+<p><strong>查看文件内容</strong></p>
+</li>
+<li><p>使用cat命令查看文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	cat [选项] [file]...</span><br><span class="line">常见选项：</span><br><span class="line">	-n ,--number</span><br><span class="line">	  对每一行进行编导</span><br></pre></td></tr></table></figure>
+
+<p>常见用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/passwd</span><br><span class="line">$ cat -n /etc/passwd</span><br><span class="line">$ sudo cat /etc/passwd /etc/shadow</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用head命令查看文件的前几行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">格式:</span><br><span class="line">	head [选项] [file]...</span><br><span class="line">常见选项：</span><br><span class="line">	-n, --lines=[-]NUM</span><br><span class="line">		显示前NUM行；若在NUM前面添加&#x27;-&#x27;号，则显示除了后NUM行的所有行</span><br></pre></td></tr></table></figure>
+
+<p>常见用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ head text1 # 显示text1的前10行</span><br><span class="line">$ head text1 text2 text3 # 显示text1,text2,text3的前10行</span><br><span class="line">$ head -n 5 text1 # 显示text1的前5行</span><br><span class="line">$ head -n -5 text1 # 显示除了最后5行的所有行</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用tail命令查看文件的后几行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line"> 	tail [选项] [file]...</span><br><span class="line">常见选项：</span><br><span class="line"> 	-n, --lines=[+]NUM</span><br><span class="line"> 		显示后NUM行；若在NUM前面添加&#x27;+&#x27;号，则从第NUM开始显示</span><br><span class="line"> 	-F</span><br><span class="line"> 		显示后面追加的数据。一般用于查看日志文件。</span><br></pre></td></tr></table></figure>
+
+<p>常见用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ tail text1 # 显示text1的后10行</span><br><span class="line">$ tail text1 text2 text3 # 显示text1,text2,text3的后10行</span><br><span class="line">$ tail -n 5 text1 # 显示text1的后5行</span><br><span class="line">$ tail -n +5 text1 # 从第5行开始显示</span><br><span class="line">$ tail -F server.log # 显示后10行，并且会显示后面追加的数据</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用less(more)单页浏览文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line"> 	more [选项] file...</span><br></pre></td></tr></table></figure>
+
+<p>less是more的高级版本，若系统中没有less命令，才考虑使用more。</p>
+<p>常见用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ less text1 			    	# 浏览text1</span><br><span class="line">$ less text1 text2			    # 浏览text1, text2</span><br></pre></td></tr></table></figure>
+
+<p>进入浏览页面后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">f(forward) 往后翻一页</span><br><span class="line">b(backward) 往前翻一页</span><br><span class="line">:n(next) 查看下一个文件</span><br><span class="line">:p(previous) 查看上一个文件</span><br><span class="line">q(quit) 退出浏览界面</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p><strong>重定向</strong></p>
+<p>cat,head,tail等命令经常和重定向一起使用，比如：tail -n 20 text1 &gt; a.txt。</p>
+<p>常见用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ who &gt; users                            #清空再写入</span><br><span class="line">$ echo &quot;liu yi fei&quot; &gt;&gt; users			 #追加</span><br><span class="line">$ wc -l &lt; users 								</span><br><span class="line">$ cat users file1 &gt; text # file1不存在</span><br><span class="line">$ cat users file1 2&gt; text # file1不存在</span><br><span class="line">$ cat users file1 &gt;&amp; text # file1不存在		#stdin和stdout  （&gt;&amp;）</span><br></pre></td></tr></table></figure>
+
+<p>输入重定向用得比较少，输出重定向用得比较多</p>
+<p><strong>搜索文件内容</strong></p>
+<p>grep(globally search for a regular expression)命令可以用于搜索文件内容，它的功能非常强大！grep 命令会按正则表达式去搜索文件，如果文件中某一行匹配指定的正则表达式，grep命令则会显示这一行。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line">	grep [选项] pattern [file]...</span><br><span class="line">常见选项：</span><br><span class="line">	-E, --extended-regexp   使用扩展的正则表达式</span><br><span class="line">	-i, --ignore-case       忽略大小写</span><br><span class="line">	-v,--invert-match       显示不匹配的正则表达式的行</span><br><span class="line">	-n, --line-number       显示行号</span><br><span class="line">	-c, --count             不显示匹配的行，显示匹配行的个数</span><br></pre></td></tr></table></figure>
+
+<p>常见用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ grep -nE &quot;firmament&quot; The_Holy_Bible.txt 				# 显示The_Holy_Bible.txt中包含&quot;firmament&quot;的所有行，并显示行号</span><br><span class="line">$ grep -cvE &quot;firmament&quot; The_Holy_Bible.txt 				# 统计The_Holy_Bible.txt中不包含&quot;firmament&quot;的行数</span><br></pre></td></tr></table></figure>
+
+<p><strong>正则表达式</strong></p>
+<p>正则表达式语法有点复杂，而且不同的工具使用的语法还不尽相同。下面我们介绍一些常用的正则表达式语法规则：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1. 基本单位</span><br><span class="line"> 基本单位主要包含：字符、转义字符、.(匹配任意一个字符)、集合(比如，[abc],[^abc])、(expr)</span><br><span class="line">2. 基本操作</span><br><span class="line"> 操作的对象是基本单位，主要包含两个基本操作：连接和重复</span><br><span class="line"> a. 连接：&quot;ab&quot;, &quot;[abc]x&quot;, &quot;.txt&quot;, &quot;\.txt&quot;</span><br><span class="line"> b. 重复</span><br><span class="line"> +: 重复至少一次(&gt;=1), 比如：&quot;abc+&quot;, &quot;[abc]+&quot;</span><br><span class="line"> ?: 重复零次或一次(0|1), 比如：&quot;abc?&quot;, &quot;[abc]?&quot;</span><br><span class="line"> *: 重复任意次数(&gt;=0), 比如：&quot;abc*&quot;, &quot;[abc]*&quot;, &quot;.*&quot;</span><br><span class="line"> &#123;m&#125;: 重复m次</span><br><span class="line"> &#123;m,n&#125;: 重复m到n次([m,n])</span><br><span class="line"> &#123;n, &#125;: 至少重复n次([&gt;=n])</span><br><span class="line">3. 指定基本单位出现的位置</span><br><span class="line"> ^: 行首，比如：&quot;^abc&quot;</span><br><span class="line"> $: 行尾，比如：&quot;xyz$&quot;</span><br><span class="line"> \&lt;: 词首</span><br><span class="line"> \&gt;: 词尾</span><br></pre></td></tr></table></figure>
+
+<p><strong>命令的组合</strong></p>
+<p>grep 命令之所以强大，主要在于它可以和其它命令组合使用。命令的组合主要有以下三种方式：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.cmd1 ; cmd2</span><br><span class="line">	先执行cmd1，再执行cmd2.如：mkdir dir；cd dir</span><br><span class="line">2.cmd1 | cmd2（管道）</span><br><span class="line">	将上一个命令的输出作为下一个命令的输入。如：history|tail -n 20</span><br><span class="line">3.cmd1 | xargs cmd2</span><br><span class="line">	xargs(extended arguments) 可以将标准输入里面的每一行转换成命令的参数</span><br><span class="line"> 	xargs往往和管道一起使用，如：cmd1 | xargs cmd2，它把cmd1输出的每一行作为cmd2的参数</span><br><span class="line"> 	find . -name &quot;*.c&quot; | xargs grep -nE &quot;\&lt;main\(&quot;       #在当前目录下找出所有.c文件的main函数</span><br></pre></td></tr></table></figure>
+
+<p><strong>改变文件权限</strong></p>
+<p>使用chmod命令可以改变文件和目录的权限。</p>
+<p>目录：本质就是一个文件。 这个文件的内容是一个一个目录项(directory entry)，在逻辑上，目录项之间是用链表的方式链接起来的。</p>
+<p>权限对于目录文件和普通文件的含义是不一样的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">普通文件</span><br><span class="line"> r: 可读</span><br><span class="line"> w: 可写</span><br><span class="line"> x: 可执行 (可执行程序和脚本文件需要x权限才能直接运行)</span><br><span class="line">目录</span><br><span class="line"> r: 可读 (ls)</span><br><span class="line"> w：可写 (在目录下添加和删除文件)</span><br><span class="line"> x: 可执行 (cd，读写权限依赖于x权限，所以目录一般都设置了x权限)</span><br></pre></td></tr></table></figure>
+
+<p>chmod 目录的用法如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">1. 文字设定法 (较少使用)</span><br><span class="line">	 chmod [ugoa][+=-][rwx] file/dir</span><br><span class="line">	 u: user</span><br><span class="line">	 g: group</span><br><span class="line">	 o: other</span><br><span class="line">	 a: all</span><br><span class="line"> 	+: 添加权限</span><br><span class="line"> 	-: 删除权限</span><br><span class="line"> 	=: 将权限设置为</span><br><span class="line">2. 数字设定法 (常用)</span><br><span class="line"> 	chmod mode file/dir</span><br><span class="line"> 	mode: 三位八进制数字</span><br></pre></td></tr></table></figure>
+
+<p>常见用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ chmod o+w text1                  #other添加可写权限</span><br><span class="line">$ chmod u=rwx,g=rx,o=r text1       #user权限为rwx,group的权限为rx,other权限为r</span><br><span class="line">$ chmod 664 text1				   #rw- rw- r--</span><br></pre></td></tr></table></figure>
+
+<p><strong>文件创建掩码</strong></p>
+<p>文件和目录在创建的时候都有一个默认的权限，该权限是由文件创建掩码 umask 决定的。我们可以用 umask 命令查看当前的文件创建掩码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ umask</span><br><span class="line">  	0002 # 当前的文件创建掩码为2  </span><br></pre></td></tr></table></figure>
+
+<p>接下来，我们创建文件 text 和目录 dir，查看它们的权限：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l</span><br><span class="line">drwxrwxr-x  2 he he 4096 3月  12 20:55 dir/</span><br><span class="line">-rw-rw-r--  1 he he    0 3月  13 20:34 text</span><br></pre></td></tr></table></figure>
+
+<p>可见当 umask &#x3D; 0002 时，目录的默认权限为 775，文件的默认权限为 664</p>
+<p>将文件创建掩码 umask 设置为 0023</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ umask 0023</span><br></pre></td></tr></table></figure>
+
+<p>再创建文件 text1 和目录 dir1，查看它们的权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ls -l</span><br><span class="line">drwxr-xr-- 2 he he 4096 3月  13 20:40 dir1</span><br><span class="line">-rw-r--r-- 1 he he    0 3月  13 20:40 text1</span><br></pre></td></tr></table></figure>
+
+<p>可见当 umask &#x3D; 0023 时，目录的默认权限为 754，文件的默认权限为 644 (643-023)</p>
+<p><strong>目录的权限初始为777，普通文件的权限初始为666，与umask相与后为默认权限。</strong></p>
+<p><strong>链接</strong></p>
+<p>我们可以用 ln 命令创建硬链接和符号连接(软链接)。</p>
+<p>创建硬链接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ln text1 h_link</span><br><span class="line">$ ls -li</span><br><span class="line">	268648 -rw-r--r-- 2 he he    0 3月  13 20:40 h_link</span><br><span class="line">	268648 -rw-r--r-- 2 he he    0 3月  13 20:40 text1</span><br></pre></td></tr></table></figure>
+
+<p>可见 text1 和 h_link 是指向同一个文件的，并且硬链接数也由原来的 1 变成了 2。删除 text1 或 h_link 只会减少硬链接数，当硬链接数为 0 的时候，才会真正删除磁盘上的文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ rm text1</span><br><span class="line">$ ls -li</span><br><span class="line">	268648 -rw-r--r-- 1 he he    0 3月  13 20:40 h_link       # 硬链接数变为了 1</span><br><span class="line">$ rm h_link</span><br></pre></td></tr></table></figure>
+
+<p>创建符号链接：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ ln -s text s_link</span><br><span class="line">$ ls -li</span><br><span class="line">		268648 lrwxrwxrwx 1 he he 4 3月  13 21:24 s_link -&gt; text # s_link文件的内容为text，因此大小为4</span><br><span class="line">		264859 -rw-rw-r-- 1 he he 0 3月  13 20:34 text</span><br></pre></td></tr></table></figure>
+
+<p>可见 text 和 s_link 是指向不同文件的，text 的硬链接数不会发生改变。删除 text 会导致符号链接 s_link 悬空：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ rm text</span><br><span class="line">$ ls -li</span><br><span class="line">		268648 lrwxrwxrwx 1 he he 4 3月  13 21:24 s_link -&gt; text # 颜色会发生</span><br><span class="line">改变</span><br></pre></td></tr></table></figure>
+
+<p>我们可以将符号链接和 Windows 系统上的快捷方式，或者 C 语言中的指针做类比。对于大多数命令(rm除外)，如果参数是符号链接，其实操作的是符号链接指向的文件(类似指针的解引用操作)：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ echo &quot;I love xixi\n&quot; &gt; text</span><br><span class="line">$ cat s_link</span><br><span class="line">I love xixi</span><br><span class="line">$ rm s_link # 删除符号链接</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-其他命令"><a href="#3-其他命令" class="headerlink" title="3.其他命令"></a>3.其他命令</h2><p><strong>远程复制</strong></p>
+<p>scp 命令可以用于上传和下载文件:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">上传：将本地的文件复制到远程</span><br><span class="line">下载：将远程的文件复制到本地</span><br></pre></td></tr></table></figure>
+
+<p>scp 的用法和 cp 非常类似：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line"> 	scp [选项] SRC... DEST</span><br><span class="line"> 	本地路径：可以用绝对路径，也可以用相对路径</span><br><span class="line"> 	远程路径：用户名@IP:路径</span><br><span class="line">常用选项：</span><br><span class="line"> 	-r      </span><br><span class="line"> 	递归复制整个目录</span><br></pre></td></tr></table></figure>
+
+<p>常见用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ scp he@IP:~/text1 . 			# 将he用户家目录下的text1文件下载到当前工作目录</span><br><span class="line">$ scp ./file he@IP:~ 			# 将当前工作目录下的file文件上传到he用户的家目录下</span><br></pre></td></tr></table></figure>
+
+<p><strong>打包压缩</strong></p>
+<p>我们可以用 tar 命令打包和压缩文件。tar 是一个非常有历史的工具，这里我们只介绍它的传统(经典)用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line"> 		tar [主选项+辅选项] 包名 [文件或目录]...</span><br><span class="line"> 主选项(有且只能选择其中一个)：</span><br><span class="line"> 		c: 创建</span><br><span class="line"> 		r: 追加</span><br><span class="line"> 		x: 释放</span><br><span class="line"> 辅选项：</span><br><span class="line"> 		f: 指定包文件的名称</span><br><span class="line"> 		v: 显示详细信息</span><br><span class="line"> 		z: 使用gzip算法压缩或解压缩包文件</span><br></pre></td></tr></table></figure>
+
+<p>常见用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ tar cvf package.tar text*</span><br><span class="line">$ tar rvf package.tar The_Holy_Bible.txt</span><br><span class="line">$ tar xvf package.tar</span><br><span class="line">$ tar czvf package.tar.gz *</span><br><span class="line">$ tar xzvf package.tar.gz</span><br></pre></td></tr></table></figure>
+
+<p><strong>别名</strong></p>
+<p>有些命令比较长，自然我们就想给这些命令起一个别名，方便以后使用，alias 命令就是用来做这事情的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">格式：</span><br><span class="line"> 		alias [命令=别名]...</span><br></pre></td></tr></table></figure>
+
+<p>常见用法：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ alias # 查看别名</span><br><span class="line">alias g++11=&#x27;g++ -std=c++11&#x27;</span><br><span class="line">alias ll=&#x27;ls -alF&#x27;</span><br><span class="line">alias ls=&#x27;ls --color=auto&#x27;</span><br><span class="line">...</span><br><span class="line">$ alias h=&#x27;history&#x27; # 设置别名</span><br></pre></td></tr></table></figure>
+
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/Linux/" class="">
+              Linux
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>mitPosso</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/2023/07/28/linux-ming-ling/" target="_blank" title="Linux常用命令">http://example.com/2023/07/28/linux-ming-ling/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/2023/07/28/vim/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> 上一篇:
+        <div class="title-text">Vim常用操作</div>
+      </div>
+      
+      <!-- <div class="content">
+        1.常见操作Vim(Vi improved) 是从 Vi 发展出来的一个文本编辑器。Vim 在程序员中使用地非常广泛，和
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2023/07/28/di-liu-zhang-shu-zu-di-qi-zhang-di-gui/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">第六章数组和第七章递归</div>
+      </div>
+      <!-- <div class="content">
+        到目前为止，我们见过的变量都只能存储单个数据项，这样的变量称为标量(scalar)。C 语言也支持聚合变量，这类变量可以
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+      <div id="appDonate" class="post-donate">
+  <div id="donate_board" class="donate_bar center" ref="donate">
+    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
+  </div>
+  <transition name="fade">
+    <div 
+      class="donate-box-mask"
+      v-cloak 
+      v-show="visible"
+      @click="cancelDialogDrawer()"
+    >
+    </div>
+  </transition>
+  <transition name="bounce">
+    <div class="donate-box" v-cloak v-show="visible">
+      <div class="donate-box_close">
+        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
+      </div>
+      <div class="donate-box_title">
+        <h4>
+          你的赏识是我前进的动力
+        </h4>
+      </div>
+      <div class="donate-box_tab">
+        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
+          支付宝
+        </div>
+        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
+          微信
+        </div>
+      </div>
+      <div class="donate-box_img">
+        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
+          <img src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
+        </div> 
+        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
+          <img src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDonate',
+    data: {
+      visible: false,
+      tabActive: 'Alipay',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        // function getScroll() {
+        //   return {
+        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        //   };
+        // }
+        this.top = $(document).scrollTop() // or getScroll().top
+        // console.log('aa', $('.main-content'));
+        body.style.cssText = 'overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+      changeTabActive(name) {
+        this.tabActive = name;
+      }
+    },
+    created() {}
+  })
+</script>
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      <div id="gitment-container"></div>
+
+    
+  </div>
+
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>mitPosso</h2>
+        
+        
+          <p>我是副标题</p>
+
+        
+        
+          <p><span id="jinrishici-sentence">木亶</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:me@xxx.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/yuang01/hexo-theme-bamboo"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=你的qq号码"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="toc-text">常见命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%94%A8%E6%88%B7%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-text">1.用户子系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%96%87%E4%BB%B6%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-text">2.文件子系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E7%9B%AE%E5%BD%95%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">2.1目录相关命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">2.2文件相关命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="toc-text">3.其他命令</span></a></li></ol></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/07/28/vim/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">07-28</span>
+                
+              </div>
+              <a class="post-title" href="/2023/07/28/vim/">Vim常用操作</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/07/28/linux-ming-ling/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">07-28</span>
+                
+              </div>
+              <a class="post-title" href="/2023/07/28/linux-ming-ling/">Linux常用命令</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/07/28/di-liu-zhang-shu-zu-di-qi-zhang-di-gui/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">07-28</span>
+                
+              </div>
+              <a class="post-title" href="/2023/07/28/di-liu-zhang-shu-zu-di-qi-zhang-di-gui/">第六章数组和第七章递归</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  
+    <!-- 底部鱼儿跳动效果，依赖于jquery-->
+<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
+<script>
+  var RENDERER = {
+    POINT_INTERVAL: 5,
+    FISH_COUNT: 3,
+    MAX_INTERVAL_COUNT: 50,
+    INIT_HEIGHT_RATE: .5,
+    THRESHOLD: 50,
+    FISH_COLOR: '',
+    init: function () {
+      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
+    },
+    setFishColor: function () {
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
+      if (isDark) {
+        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
+      } else {
+        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
+      }
+    },
+    setParameters: function () {
+      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
+    },
+    createSurfacePoints: function () {
+      var t = Math.round(this.width / this.POINT_INTERVAL);
+      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
+      for (var i = 1; i < t; i++) {
+        var e = new SURFACE_POINT(this, i * this.pointInterval),
+          h = this.points[i - 1];
+        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
+      }
+    },
+    reconstructMethods: function () {
+      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
+      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
+    },
+    watchWindowSize: function () {
+      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
+    },
+    clearTimer: function () {
+      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
+    },
+    jdugeToStopResize: function () {
+      var t = this.$window.width(),
+        i = this.$window.height(),
+        e = t == this.tmpWidth && i == this.tmpHeight;
+      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
+    },
+    bindEvent: function () {
+      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
+    },
+    getAxis: function (t) {
+      var i = this.$container.offset();
+      return {
+        x: t.clientX - i.left + this.$window.scrollLeft(),
+        y: t.clientY - i.top + this.$window.scrollTop()
+      }
+    },
+    startEpicenter: function (t) {
+      this.axis = this.getAxis(t)
+    },
+    moveEpicenter: function (t) {
+      var i = this.getAxis(t);
+      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
+    },
+    generateEpicenter: function (t, i, e) {
+      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
+        var h = Math.round(t / this.pointInterval);
+        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+    },
+    controlStatus: function () {
+      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
+      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
+    },
+    render: function () {
+      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
+      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
+      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
+    }
+  },
+  SURFACE_POINT = function (t, i) {
+    this.renderer = t, this.x = i, this.init()
+  };
+  SURFACE_POINT.prototype = {
+    SPRING_CONSTANT: .03,
+    SPRING_FRICTION: .9,
+    WAVE_SPREAD: .3,
+    ACCELARATION_RATE: .01,
+    init: function () {
+      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
+        previous: 0,
+        next: 0
+      }
+    },
+    setPreviousPoint: function (t) {
+      this.previous = t
+    },
+    setNextPoint: function (t) {
+      this.next = t
+    },
+    interfere: function (t, i) {
+      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
+    },
+    updateSelf: function () {
+      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
+    },
+    updateNeighbors: function () {
+      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
+    },
+    render: function (t) {
+      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
+    }
+  };
+  var FISH = function (t) {
+    this.renderer = t, this.init()
+  };
+  FISH.prototype = {
+    GRAVITY: .4,
+    init: function () {
+      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
+    },
+    getRandomValue: function (t, i) {
+      return t + (i - t) * Math.random()
+    },
+    reverseVertical: function () {
+      this.isOut = !this.isOut, this.ay *= -1
+    },
+    controlStatus: function (t) {
+      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
+    },
+    render: function (t) {
+      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
+    }
+  }, $(function () {
+    RENDERER.init()
+    $('.dark').click(function () {
+      setTimeout(() => {
+        RENDERER.setFishColor();
+        RENDERER.context.fill();
+      });
+    })
+  });
+</script>
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2019 - 2020 <a target="_blank" rel="noopener" href="https://github.com/yuang01">yuang01</a> | Powered by <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a> | Theme <a target="_blank" rel="noopener" href="https://github.com/yuang01/theme">Bamboo</a> </p>
+
+          </div>
+        
+      
+        
+          
+            <!-- 不蒜子统计 -->
+            <!-- 不蒜子统计 -->
+<span id="busuanzi_container_site_pv">
+      <i class="fas fa-eye" aria-hidden="true"></i>本站总访问量：<span id="busuanzi_value_site_pv"></span> 次
+</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+      <i class="fas fa-users" aria-hidden="true"></i>本站访客数：<span id="busuanzi_value_site_uv"></span> 人
+</span>
+
+          
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark">
+  <div class="dark-content">
+    <i class="fas fa-moon" aria-hidden="true"></i>
+    <!-- <span>关灯</span> -->
+  </div>
+  
+</div>
+
+<script>
+  $(function() {
+    let isDark = JSON.parse(localStorage.getItem('dark'))  || JSON.parse('true');
+    if (isDark) {
+      $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          </div>
+          `
+        );
+    }
+    $('.dark').click(function() {
+      if ($(document.body).is('.darkModel')) {
+        $(document.body).removeClass('darkModel');
+        localStorage.setItem('dark', false);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      } else {
+        $(document.body).addClass('darkModel');
+        localStorage.setItem('dark', true);
+        $(".dark-content").replaceWith(
+          `
+          <div class='dark-content'>
+            <i class="fas fa-lightbulb" aria-hidden="true"></i>
+          </div>
+          `
+        );
+      }
+    })
+  })
+</script>
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script src="/js/goTop.js"></script>
+
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+      <link rel="stylesheet" href="/js/aplayer/APlayer@1.10.1.min.css">
+<style>
+.aplayer .aplayer-lrc p {
+  
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px !important;
+}
+
+.aplayer .aplayer-lrc p.aplayer-lrc-current {
+  
+  font-size: 15px;
+  color: #42b983;
+}
+
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+  left: -66px !important;
+}
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+  left: 0px !important;
+}
+
+
+</style>
+<meting-js  
+  class=""
+  server="netease"
+  type="playlist"
+  id="431192155"
+  fixed='true'
+  autoplay='false'
+  theme='#42b983'
+  loop='all'
+  order='random'
+  preload='auto'
+  volume='0.7'
+  list-folded='true'
+>
+</meting-js>
+
+<!-- <style>
+  #aplayer {
+    position: fixed;
+    left: 0;
+    bottom: 300px;
+  }
+</style> -->
+<script src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script src="https://unpkg.com/meting@2/dist/Meting.min.js"></script>
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+      <script type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    <script src="/js/utils/index.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- 文章目录所需js -->
+<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+
+<script>
+  var headerEl = 'h2, h3, h4',  //headers 
+    content = '.post-detail',//文章容器
+    idArr = {};  //标题数组以确定是否增加索引id
+  //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -70,
+    // headingsOffset: -($(window).height() * 0.4 - 45),
+    headingsOffset: -($(window).height() * 0.4 - 70),
+    // positionFixedSelector: '.toc-main',
+    // positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    activeLinkClass: 'is-active-link',
+    orderedList: true,
+    collapseDepth: 20,
+    // onClick: function (e) {},
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init(option);
+      mobileTocClick();
+    });
+
+  }
+
+  window.tocScrollFn = function () {
+    return bamboo.throttle(function () {
+      findHeadPosition();
+    }, 100)()
+  }
+  window.addEventListener('scroll', tocScrollFn);
+
+  const findHeadPosition = function (top) {
+    if ($('.toc-list').length <= 0) {
+      return false;
+    }
+    setTimeout(() => {  // or DOMContentLoaded 
+      autoScrollToc();
+    }, 0);
+  }
+
+  const autoScrollToc = function () {
+    const $activeItem = document.querySelector('.is-active-link');
+    const $cardToc = document.querySelector('.toc-content');
+    const activePosition = $activeItem.getBoundingClientRect().top
+    const sidebarScrollTop = $cardToc.scrollTop
+    if (activePosition > (document.documentElement.clientHeight - 100)) {
+      $cardToc.scrollTop = sidebarScrollTop + 150
+    }
+    if (activePosition < 150) {
+      $cardToc.scrollTop = sidebarScrollTop - 150
+    }
+  }
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+      mobileTocClick();
+    }
+  });
+  
+  // 手机端toc按钮点击出现目录
+  const mobileTocClick = function () {
+    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
+    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
+    let right = '45px';
+    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
+      right = '100px'
+    }
+    const mobileToc = {
+      open: () => {
+        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
+      },
+
+      close: () => {
+        $cardTocLayout.style.animation = 'toc-close .2s'
+        setTimeout(() => {
+          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
+        }, 100)
+      }
+    }
+    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
+      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
+      else mobileToc.close()
+    })
+
+    $cardToc.addEventListener('click', (e) => {
+      if (window.innerWidth < 992) { // 小于992px的时候
+        mobileToc.close()
+      }
+    })
+  }
+</script>
+
+<style>
+  /* .is-position-fixed {
+    position: sticky !important;
+    top: 74px;
+  }
+
+  .toc-main ul {
+    counter-reset: show-list;
+  }
+
+  .toc-main ul li::before {
+    content: counter(item)".";
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 0;
+  } */
+</style>
+ 
+
+<!-- 设置导航背景 -->
+<script>
+  let setHeaderClass = () => {
+    const nav = $('#navHeader');
+    const navTop = nav.outerHeight();
+    const winTop = $(window).scrollTop();
+    if(winTop > navTop) {
+      nav.addClass('header-bg-color');
+    }
+    else {
+      nav.removeClass('header-bg-color');
+    }
+  };
+
+  let scrollCollect = () => {
+    return bamboo.throttle(function (e) {
+      setHeaderClass();
+    }, 200)()
+  }
+
+  let initHeaderBg = () => {
+    setHeaderClass();
+  }
+
+  setHeaderClass();
+  window.addEventListener('scroll', scrollCollect);
+
+  document.addEventListener('pjax:send', function () {
+    window.removeEventListener('scroll', scrollCollect)
+  })
+  document.addEventListener('pjax:complete', function () {
+    window.addEventListener('scroll', scrollCollect);
+    setHeaderClass();
+  })
+</script> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
+<script>
+  function loadPhotoOnlineJS() {
+    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getPhotoOnline/index.js');
+  };
+  $(function () {
+    loadPhotoOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getPhotoJson == "undefined") {
+      loadPhotoOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
+<script>
+  function loadTalkOnlineJS() {
+    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
+      return;
+    } 
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
+    loadScript('/js/getTalkOnline/index.js');
+  };
+  $(function () {
+    loadTalkOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getTalkJson == "undefined") {
+      loadTalkOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
+<script>
+  function loadSiteOnlineJS() {
+    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getSiteOnline/index.js');
+  };
+  $(function () {
+    loadSiteOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getSiteJson == "undefined") {
+      loadSiteOnlineJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
+
+<!-- 图片懒加载 -->
+<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+  
+    <script type="text/javascript">
+  var utteranceCommon = {};
+
+  function check_utterance() {
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('true');
+    if (isDark) {
+      utteranceCommon.Theme = 'github-dark';
+    } else {
+      utteranceCommon.Theme = 'github-light';
+    }
+
+    return document.getElementById("gitment-container");
+  }
+  comment_el = '#gitment-container';
+  load_utterance = function () {
+    if ($(comment_el).length) {
+      // 匿名函数，防止污染全局变量
+      const HEAD = check_utterance();
+
+      var utterances = document.createElement('script');
+      utterances.type = 'text/javascript';
+      utterances.async = true;
+      utterances.setAttribute('issue-term', 'pathname')
+      utterances.setAttribute('theme', utteranceCommon.Theme)
+      utterances.setAttribute('repo', '2190331088tyy/comment')
+      utterances.crossorigin = 'anonymous';
+      utterances.src = 'https://utteranc.es/client.js';
+      // content 是要插入评论的地方
+      document.getElementById('gitment-container').appendChild(utterances);
+
+    }
+  }
+
+  function dark_utterance() {
+    const HEAD = check_utterance();
+    if (!HEAD) return;
+    const message = {
+      type: 'set-theme',
+      theme: utteranceCommon.Theme
+    };
+    const utteranceIframe = document.querySelector('iframe');
+    utteranceIframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+
+  $(document).ready(load_utterance);
+  document.addEventListener('pjax:complete', function () {
+    load_utterance();
+  });
+
+  $('.dark').click(function () {
+    setTimeout(() => {
+      dark_utterance();
+    });
+  })
+
+</script>
+
+<style>
+  .utterances {
+    max-width: inherit !important;
+  }
+</style>
+  
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+<!-- 轮播图标签 -->
+<script>
+  var bambooSwiperTag = {};
+  function load_swiper() {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
+    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      autoplay: true ? {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      } : false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on:{
+        init: function(){
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        }, 
+        slideChangeTransitionEnd: function(){ 
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        } 
+      }
+    });
+  }
+
+  document.addEventListener('pjax:complete', function () {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    if (typeof bambooSwiperTag.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/js/pjax@0.2.8/index.js"></script>
+  
+    <!-- 样式位于：source/css/_third-party/pjaxanimate.styl -->
+
+<div class="pjax-animate">
+  
+    <div class="loading-circle"><div id="loader-circle"></div></div>
+    <script>
+      window.ShowLoading = function() {
+        $(".loading-circle").css("display", "block");
+      };
+      window.HideLoading = function() {
+        $(".loading-circle").css("display", "none");
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  </body>
+</html>
