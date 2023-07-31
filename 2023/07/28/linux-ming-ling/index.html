@@ -610,7 +610,7 @@
 <p>关闭主机之前，请务必先关闭虚拟机！否则，可能会损坏虚拟机文件，导致不能启动虚拟机。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">$ man shutdown</span><br><span class="line"> shutdown - 挂起，关机或重启计算机</span><br><span class="line">常用选项：</span><br><span class="line"> -H, --halt: 挂起</span><br><span class="line"> -P, --poweroff: 关机(默认)</span><br><span class="line"> -r, --reboot: 重启</span><br><span class="line"> -c(cancel): 取消</span><br><span class="line"> </span><br><span class="line"> $ sudo shutdown</span><br><span class="line"> 广播关机消息给所有用户，并于一分钟后关机。</span><br><span class="line">$ sudo shutdown now</span><br><span class="line"> 立刻关机</span><br></pre></td></tr></table></figure>
 
-<h2 id="1-用户子系统"><a href="#1-用户子系统" class="headerlink" title="1.用户子系统"></a>1.用户子系统</h2><p>Linux 用户可以分为：超级用户(root)和普通用户。超级用户又被称为：根用户和特权用户，它拥有至高无上的权利。普通用户又被划分为管理用户和其它用户。管理用户即我们俗称的 sudoers，他们可以临时提升权限(使用sudo命令)，安装Ubuntu过程中创建的用户默认就是 sudoers。</p>
+<h2 id="用户子系统"><a href="#用户子系统" class="headerlink" title="用户子系统"></a>用户子系统</h2><p>Linux 用户可以分为：超级用户(root)和普通用户。超级用户又被称为：根用户和特权用户，它拥有至高无上的权利。普通用户又被划分为管理用户和其它用户。管理用户即我们俗称的 sudoers，他们可以临时提升权限(使用sudo命令)，安装Ubuntu过程中创建的用户默认就是 sudoers。</p>
 <p><strong>查看所有用户</strong></p>
 <p>Linux系统下的所有用户，在 passwd 配置文件中都有一条相关记录。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ sudo cat /etc/passwd</span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">...</span><br><span class="line">he:x:1000:1000:he,,,:/home/he:/bin/bash</span><br><span class="line"></span><br><span class="line">//每一行对应一条记录，每条记录有多个字段，字段之间以 : 分割。我们可以在5号手</span><br><span class="line">册中查看 passwd 文件的格式和规范：</span><br><span class="line">$ man 5 passwd</span><br><span class="line">/etc/passwd 为每个用户账户包含一行，包含使用冒号 (“:”) 分隔的七个字段，分别是：</span><br><span class="line"> ·   登录名</span><br><span class="line"> ·   可选的加密后的密码</span><br><span class="line"> ·   数字用户 ID</span><br><span class="line"> ·   数字组 ID</span><br><span class="line"> ·   用户名和注释字段</span><br><span class="line"> ·   用户主目录</span><br><span class="line"> ·   可选的用户命令解释器</span><br></pre></td></tr></table></figure>
@@ -650,7 +650,7 @@
 <p>ps: </p>
 <p>使用su命令依次切换到多个用户的时候，这些用户时使用栈结构来管理的。执行su命令相当于将用户压入栈顶，执行exit命令相当于将用户弹出栈顶。</p>
 <p>当用户在上述的栈结构中存在的时候，该用户是不能被删除的。</p>
-<h2 id="2-文件子系统"><a href="#2-文件子系统" class="headerlink" title="2.文件子系统"></a>2.文件子系统</h2><h3 id="2-1目录相关命令"><a href="#2-1目录相关命令" class="headerlink" title="2.1目录相关命令"></a>2.1目录相关命令</h3><p>和 Windows 不一样，Linux是以树的结构来管理文件系统的。我们将树的根结点称为根目录，用 &#x2F; 表示。</p>
+<h2 id="文件子系统"><a href="#文件子系统" class="headerlink" title="文件子系统"></a>文件子系统</h2><h3 id="目录相关命令"><a href="#目录相关命令" class="headerlink" title="目录相关命令"></a>目录相关命令</h3><p>和 Windows 不一样，Linux是以树的结构来管理文件系统的。我们将树的根结点称为根目录，用 &#x2F; 表示。</p>
 <p><strong>常见目录</strong></p>
 <p>在Linux中，我们是以分门别类的方式来管理文件的，也就是说，我们会将功能相似的文件放到同一个目录下进行管理。这和Windows按工程组织文件的方式不太一样。</p>
 <p>常见目录的功能如下表所示：</p>
@@ -783,7 +783,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ rm text1 # 删除文件text1</span><br><span class="line">$ rm text1 text2 text3 # 删除文件text1, text2, text3</span><br><span class="line">$ rm -i *.txt # 删除当前目录下所有以.txt结尾的文件，并提示用户是</span><br><span class="line">否删除</span><br><span class="line">$ rm -rf dir # 递归删除目录dir, 不给出任何提示</span><br></pre></td></tr></table></figure>
 
 <p>注意：使用rm命令删除文件和目录后，就很难恢复了(Linux系统没有所谓的回收**站)。所以除非必要，不要以 root 身份或者使用 sudo 权限来执行 rm 命令!</p>
-<h2 id="2-2文件相关命令"><a href="#2-2文件相关命令" class="headerlink" title="2.2文件相关命令"></a>2.2文件相关命令</h2><p><strong>创建文件</strong></p>
+<h2 id="文件相关命令"><a href="#文件相关命令" class="headerlink" title="文件相关命令"></a>文件相关命令</h2><p><strong>创建文件</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ echo &quot;Hello Linus Torvalds&quot; &gt; text  # 创建文件text, 并且文件中包含内容&quot;Hello Linus Torvalds&quot;</span><br><span class="line">$ touch text1 text2 text3          # 创建空文件text1, text2, text3(要求text1,text2,text3不存在)</span><br><span class="line">$ vim hello.c         # 编辑hello.c, 按:wq退出。</span><br></pre></td></tr></table></figure>
 
 <p><strong>查找文件</strong></p>
@@ -902,7 +902,7 @@
 <p>我们可以将符号链接和 Windows 系统上的快捷方式，或者 C 语言中的指针做类比。对于大多数命令(rm除外)，如果参数是符号链接，其实操作的是符号链接指向的文件(类似指针的解引用操作)：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ echo &quot;I love xixi\n&quot; &gt; text</span><br><span class="line">$ cat s_link</span><br><span class="line">I love xixi</span><br><span class="line">$ rm s_link # 删除符号链接</span><br></pre></td></tr></table></figure>
 
-<h2 id="3-其他命令"><a href="#3-其他命令" class="headerlink" title="3.其他命令"></a>3.其他命令</h2><p><strong>远程复制</strong></p>
+<h2 id="其他命令"><a href="#其他命令" class="headerlink" title="其他命令"></a>其他命令</h2><p><strong>远程复制</strong></p>
 <p>scp 命令可以用于上传和下载文件:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">上传：将本地的文件复制到远程</span><br><span class="line">下载：将远程的文件复制到本地</span><br></pre></td></tr></table></figure>
 
@@ -1218,7 +1218,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="toc-text">常见命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E7%94%A8%E6%88%B7%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-text">1.用户子系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E6%96%87%E4%BB%B6%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-text">2.文件子系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1%E7%9B%AE%E5%BD%95%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">2.1目录相关命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">2.2文件相关命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="toc-text">3.其他命令</span></a></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4"><span class="toc-text">常见命令</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-text">用户子系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AD%90%E7%B3%BB%E7%BB%9F"><span class="toc-text">文件子系统</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">目录相关命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4"><span class="toc-text">文件相关命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%91%BD%E4%BB%A4"><span class="toc-text">其他命令</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
