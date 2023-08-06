@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>分类: Linux | 木亶</title>
+  <title>文件系统 | 木亶</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -536,282 +536,773 @@
 </header>
         <!-- 内容区域 -->
         
+ <!-- prismjs 代码高亮 -->
+ 
 
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-<div class="bg-light-floor-categoryDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
 
-<div class="category-header"  style="background-image:url('https://pic3.zhimg.com/80/v2-98dcd81cb0d1fee52a807c13cedb8338_1440w.jpg?source=1940ef5c')">
-  <div class="category-header-title">
-    category
-  </div>
-  <div class="category-header-desc">
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        文件系统
+      </span>
+    </div>
     
-      <span class="title" id="category-header-desc"></span>
-      <script>
-  function typedFn() {
-    const el = '#category-header-desc';
-    const type = 'categoryDetail';
-    let desc = '愿你如风，被人温柔以待'
-    var typed = new Typed(el, {
-      strings: [desc],
-      startDelay: 100,
-      typeSpeed: 100,
-      loop: true,
-      backSpeed: 50,
-      showCursor: true
-    });
-  }
-  typedFn();
-</script>
+    
       
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2023-08-06 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/Linux/" class="post-detail-header_category">
+              Linux
+            </a>
+          
+        </span>
+      
+
+      
+    
   </div>
-  <div class="mask-box"></div>
+  
+  
+    <script src="/js/bubble/bubble.js"></script>
+  
 </div>
 
 
-<div class="category">
-  <div class="category-name">
-    <div class="name" style="background-color: #E8F8F5;">Linux 分类</div>
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <h1 id="阅读帮助手册"><a href="#阅读帮助手册" class="headerlink" title="阅读帮助手册"></a>阅读帮助手册</h1><h2 id="name"><a href="#name" class="headerlink" title="name"></a>name</h2><h2 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h2><p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061532761.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061532761.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806153213726"></p>
+<p><strong>函数调用内存模型</strong></p>
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061603042.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061603042.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806160314003"></p>
+<p><strong>指针类型的参数</strong></p>
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061607939.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061607939.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806160744902"></p>
+<p><strong>指针参数使用问题</strong></p>
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061609732.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061609732.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806160915693"></p>
+<h2 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h2><p>出错的条件–&gt;errno–&gt;perror  (ERROR_CHECK)</p>
+<h2 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h2><p>不要从头看到尾，按需查看</p>
+<h1 id="无缓冲的文件IO"><a href="#无缓冲的文件IO" class="headerlink" title="无缓冲的文件IO"></a>无缓冲的文件IO</h1><p>无缓冲指的是无用户态缓冲区，有内核态缓冲区。</p>
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061615828.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061615828.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806161507791"></p>
+<h1 id="fopen"><a href="#fopen" class="headerlink" title="fopen"></a>fopen</h1><p>通过用户态的FILE从而改变内核文件缓冲区最后改变了磁盘文件的数据。</p>
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061616003.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061616003.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806161628955"></p>
+<h1 id="文件描述符"><a href="#文件描述符" class="headerlink" title="文件描述符"></a>文件描述符</h1><p>因为不能直接访问内核态的数据所以将数据的地址存到一个数组里（索引数组）。</p>
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061621487.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061621487.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806162123445"></p>
+<h1 id="open-close"><a href="#open-close" class="headerlink" title="open close"></a>open close</h1><p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061659090.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061659090.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806165945054"></p>
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061700140.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061700140.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806170000100"></p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">O_RDONLY</td>
+<td align="center">以只读的方式打开</td>
+</tr>
+<tr>
+<td align="center">O_WRONLY</td>
+<td align="center">以只写的方式打开</td>
+</tr>
+<tr>
+<td align="center">O_RDWR</td>
+<td align="center">以读写的方式打开</td>
+</tr>
+<tr>
+<td align="center">O_CREAT</td>
+<td align="center">如果文件不存在，则创建文件</td>
+</tr>
+<tr>
+<td align="center">O_EXCL</td>
+<td align="center">仅与O_CREAT连用，如果文件存在，则open失败</td>
+</tr>
+<tr>
+<td align="center">O_TRUNC</td>
+<td align="center">如果文件存在，将文件的长度截至0</td>
+</tr>
+<tr>
+<td align="center">O_APPEND</td>
+<td align="center">以追加的方式打开文件，每次调用write时，文件指针自动先移动到文件尾，用于多进程写同一个文件的情况。</td>
+</tr>
+</tbody></table>
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061708259.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061708259.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806170814227"></p>
+<h1 id="文件描述符-1"><a href="#文件描述符-1" class="headerlink" title="文件描述符"></a>文件描述符</h1><p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061712908.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061712908.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806171214857"></p>
+<h1 id="使用要求"><a href="#使用要求" class="headerlink" title="使用要求"></a>使用要求</h1><p>如果open的flags存在O_CREAT,请使用3参数的版本。</p>
+<table>
+<thead>
+<tr>
+<th align="center">fopen() mode</th>
+<th align="center">open() flags</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">r</td>
+<td align="center">O_RDONLY</td>
+</tr>
+<tr>
+<td align="center">w</td>
+<td align="center">O_WRONLY  |  O_CREAT  |  O_TRUNC</td>
+</tr>
+<tr>
+<td align="center">a</td>
+<td align="center">O_WRONLY   |   O_CREAT  |  APPEND</td>
+</tr>
+<tr>
+<td align="center">r+</td>
+<td align="center">O_RDWR</td>
+</tr>
+<tr>
+<td align="center">w+</td>
+<td align="center">O_RDWR  |  O_CREAT  |  O_TRUNC</td>
+</tr>
+<tr>
+<td align="center">a+</td>
+<td align="center">O_RDWR  |   O_CREAT   |   O_APPEND</td>
+</tr>
+</tbody></table>
+<h1 id="read和write"><a href="#read和write" class="headerlink" title="read和write"></a>read和write</h1><p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061721573.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308061721573.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806172107526"></p>
+<h1 id="文本文件-二进制文件"><a href="#文本文件-二进制文件" class="headerlink" title="文本文件 二进制文件"></a>文本文件 二进制文件</h1><p>将二进制文件转化成十进制。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">：%！xxd    </span><br></pre></td></tr></table></figure>
+
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062024420.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062024420.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806202424385"></p>
+<p>将字符串写入文件中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">//文本文件</span><br><span class="line"></span><br><span class="line">#include &lt;func.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc,char* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    ARGS_CHECK(argc,2);</span><br><span class="line">    int fd = open(argv[1],O_WRONLY|O_CREAT);</span><br><span class="line">    ERROR_CHECK(fd,-1,&quot;open fd&quot;);</span><br><span class="line">    write(fd,&quot;10000000&quot;,8);</span><br><span class="line">    close(fd);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将二进制数据写入文件中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//二进制文件</span><br><span class="line"></span><br><span class="line">#include &lt;func.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc,char* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    ARGS_CHECK(argc,2);</span><br><span class="line">    int fd = open(argv[1],O_WRONLY|O_CREAT);</span><br><span class="line">    ERROR_CHECK(fd,-1,&quot;open fd&quot;);</span><br><span class="line">    int val=10000000;</span><br><span class="line">    write(fd,&amp;val,sizeof(val));</span><br><span class="line">    close(fd);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="6个读写的函数"><a href="#6个读写的函数" class="headerlink" title="6个读写的函数"></a>6个读写的函数</h1><p>**FILE: **</p>
+<ul>
+<li>fread</li>
+<li>fwrite</li>
+<li>fscanf             (“10000000”  –&gt;  fscanf(“%d”,&amp;val)  –&gt;  val&#x3D;10000000)</li>
+<li>fprintf        –&gt;     文件总是文本的</li>
+</ul>
+<p><strong>fd:</strong></p>
+<p>read,write  文件是文本的，读到的字符串。文件时二进制，怎么写就怎么读。</p>
+<h1 id="二进制的读操作"><a href="#二进制的读操作" class="headerlink" title="二进制的读操作"></a>二进制的读操作</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">#include &lt;func.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc,char* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    ARGS_CHECK(argc,2);</span><br><span class="line">    int fd = open(argv[1],O_RDWR);</span><br><span class="line">    ERROR_CHECK(fd,-1,&quot;open fd&quot;);</span><br><span class="line">    int val;                      //读的是二进制</span><br><span class="line">    read(fd,&amp;val,sizeof(val));</span><br><span class="line">    printf(&quot;val=%d\n&quot;,val);</span><br><span class="line">    close(fd);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="深入read"><a href="#深入read" class="headerlink" title="深入read"></a>深入read</h1><p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062145874.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062145874.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806214509807"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;func.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc,char* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    ARGS_CHECK(argc,2);</span><br><span class="line">    int fd=open(argv[1],O_RDONLY);  //打开的是磁盘文件 </span><br><span class="line">    ERROR_CHECK(fd,-1,&quot;open&quot;);</span><br><span class="line">    char buf[1024];</span><br><span class="line">    ssize_t set = read(fd,buf,4);</span><br><span class="line">    printf(&quot;set=%d   buf=%s \n&quot;,set,buf);</span><br><span class="line">    memset(buf,0,sizeof(buf));</span><br><span class="line">    set = read(fd,buf,4);</span><br><span class="line">    printf(&quot;set=%d   buf=%s \n&quot;,set,buf);</span><br><span class="line">    memset(buf,0,sizeof(buf));</span><br><span class="line">    set = read(fd,buf,4);</span><br><span class="line">    printf(&quot;set=%d   buf=%s \n&quot;,set,buf);</span><br><span class="line">    memset(buf,0,sizeof(buf));</span><br><span class="line">    close(fd);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="read设备文件"><a href="#read设备文件" class="headerlink" title="read设备文件"></a>read设备文件</h1><p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062200177.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062200177.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806220023143"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">//read设备会引发阻塞</span><br><span class="line">#include &lt;func.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc,char* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    char buf[1024]=&#123;0&#125;;</span><br><span class="line">    ssize_t set = read(STDIN_FILENO,buf,sizeof(buf));</span><br><span class="line">    printf(&quot;set=%ld    buf=%s \n&quot;,set,buf);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="read-write-实现一个cp命令"><a href="#read-write-实现一个cp命令" class="headerlink" title="read write 实现一个cp命令"></a>read write 实现一个cp命令</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;func.h&gt;</span><br><span class="line"></span><br><span class="line">int main(int argc,char* argv[])</span><br><span class="line">&#123;</span><br><span class="line">    ARGS_CHECK(argc,3);</span><br><span class="line">    int fd1 = open(argv[1],O_RDONLY);</span><br><span class="line">    ERROR_CHECK(fd1,-1,&quot;open fd1&quot;);</span><br><span class="line">    int fd2 = open(argv[2],O_WRONLY|O_CREAT,0666);</span><br><span class="line">    ERROR_CHECK(fd2,-1,&quot;open fd2&quot;);</span><br><span class="line">    char buf[1024];</span><br><span class="line">    while(1)&#123;</span><br><span class="line">        memset(buf,0,sizeof(buf));</span><br><span class="line">        ssize_t set = read(fd1,buf,sizeof(buf));</span><br><span class="line">        if(!set)break;</span><br><span class="line">        write(fd2,buf,set);</span><br><span class="line">&#125;</span><br><span class="line">    close(fd2);</span><br><span class="line">    close(fd1);</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int  (const void *s1,const void *s2,size_t n);</span><br><span class="line">//比较s1和s2的n个字符是否相等</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062223278.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062223278.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806222330240"></p>
+<h1 id="lseek-更改偏移量"><a href="#lseek-更改偏移量" class="headerlink" title="lseek 更改偏移量"></a>lseek 更改偏移量</h1><p>每次读文件的一个字符读完偏移到下一位，读到小写字母则偏移回来，改成大写字母。</p>
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062227923.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062227923.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806222751874"></p>
+<h1 id="更改文件大小"><a href="#更改文件大小" class="headerlink" title="更改文件大小"></a>更改文件大小</h1><p>使用ftruncate函数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int ftruncate(int fd , off_t length);</span><br><span class="line">//在执行完ftruncate之后，在新空间的末尾写入一个或以上字节的数据（不为Ox00），这样新空间则不为空，文件系统会把这部分空间当成这个文件的私有空间处理，而不会出现文件大小改变的情况。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062233488.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062233488.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806223301445"></p>
+<h1 id="文件空洞"><a href="#文件空洞" class="headerlink" title="文件空洞"></a>文件空洞</h1><p>我们知道lseek()系统调用可以改变文件的偏移量，但如果程序调用使得文件偏移量跨越了文件结尾，然后再执行I&#x2F;O操作，将会发生什么情况？ read()调用将会返回0，表示文件结尾。令人惊讶的是，write()函数可以在文件结尾后的任意位置写入数据。在这种情况下，对该文件的下一次写将延长该文件，并在文件中构成一个空洞，这一点是允许的。从原来的文件结尾到新写入数据间的这段空间被成为文件空洞。调用write后文件结尾的位置已经发生变化。</p>
+<p>空洞文件就是有空洞的文件,在日常的常识中,我们使用的文件存放在硬盘分区上的时候,有多大的内容就会占用多大的空间,比如这个文本文件里面写有1000个asc字符,那么就会占用磁盘上1000B的存储空间,为了便于管理文件,文件系统都是按块大小来分配给文件的,假如这个文件系统一个块是4096的话,那么这个文件就会占用一个块的,无论实际的内容是1B还是4000B.如果我们有一个4MB的文件,那么它会在分区中占用:4MB&#x2F;4096B&#x3D;1000个块.</p>
+<p>现在我们先做一个实际的无空洞文件来看看:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#dd if=/dev/urandom of=testfile1 bs=4096 count=1000</span><br></pre></td></tr></table></figure>
+
+<p>这个命令会从&#x2F;dev&#x2F;urandom文件复制1000个块,每块大小4096,到testfile1文件去.<br>好了,我们已经有了testfile1这么一个4M的文件了,里面填充了一些随机的内容,你可以more一下.然后用ls -l查看这个文件的大小是4096000,用du -h testfile1来查看的话,文件占用的磁盘大小是4M,两者是一样的.</p>
+<p>下来是我们的重点,空洞文件,假如我们有一个文件,它有4M的大小,但是它里边很大一部分都是没有存放数据的,这样可不可以呢?试一下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#dd if=/dev/urandom of=testfile2 bs=4096 seek=999 count=1</span><br></pre></td></tr></table></figure>
+
+<p>这个命令跟前一个命令相似,不同的是,它其实复制了1个块的内容,前面的999个块都跳过了。我们ls -l一下,发现文件的大小还是4096000,用du -h testfile2查看,占用的块大小是4K。我们发现,虽然文件是4M,但是实际在磁盘上只占用了4K的大小,这就是空洞文件的神奇之处.</p>
+<p>实际中的空洞文件会在哪里用到呢?常见的场景有两个:<br>一是在下载电影的时候,发现刚开始下载,文件的大小就已经到几百M了.<br>二是在创建虚拟机的磁盘镜像的时候,你创建了一个100G的磁盘镜像,但是其实装起来系统之后,开始也不过只占用了3,4G的磁盘空间,如果一开始把100G都分配出去的话,无疑是很大的浪费.</p>
+<p><img src="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062236458.png" class="lazyload placeholder" data-srcset="https://yutan.oss-cn-hangzhou.aliyuncs.com/img/202308062236458.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="image-20230806223617415"></p>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/Linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" class="">
+              Linux,文件系统
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>mitPosso</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/2023/08/06/wen-jian-xi-tong/" target="_blank" title="文件系统">http://example.com/2023/08/06/wen-jian-xi-tong/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2023/08/06/wen-jian/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">文件</div>
+      </div>
+      <!-- <div class="content">
+        文件流在 C 语言中，流 (stream) 表示任意输入的源或任意输出的目的地。流是一个抽象的概念，它即可以表示存储硬盘
+      </div> -->
+    </a>
   </div>
-  <!-- 每一篇文章卡片 -->
-  <!-- hash算法 -->
 
-<section class="posts">
-  
-    
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2023-08-06</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2023/08/06/wen-jian-xi-tong/">文件系统</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" rel="tag">Linux,文件系统</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>
 </div>
 
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2023/08/06/wen-jian-xi-tong/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            阅读帮助手册name声明
-函数调用内存模型
-
-指针类型的参数
-
-指针参数使用问题
-
-返回值出错的条件–&gt;errno–&gt;perror  (ERROR_CHECK)
-描述不要从头看到尾，按需查看
-无缓冲的文件IO无缓冲指的是无用户态
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2023/08/06/wen-jian-xi-tong/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2023/08/06/wen-jian-xi-tong/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
     
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2023-08-06</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2023/08/06/mu-lu/">目录</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
+    
 
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux-%E7%9B%AE%E5%BD%95/" rel="tag">Linux,目录</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    <!-- 打赏 -->
+    
+      <div id="appDonate" class="post-donate">
+  <div id="donate_board" class="donate_bar center" ref="donate">
+    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
+  </div>
+  <transition name="fade">
+    <div 
+      class="donate-box-mask"
+      v-cloak 
+      v-show="visible"
+      @click="cancelDialogDrawer()"
+    >
+    </div>
+  </transition>
+  <transition name="bounce">
+    <div class="donate-box" v-cloak v-show="visible">
+      <div class="donate-box_close">
+        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
+      </div>
+      <div class="donate-box_title">
+        <h4>
+          你的赏识是我前进的动力
+        </h4>
+      </div>
+      <div class="donate-box_tab">
+        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
+          支付宝
+        </div>
+        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
+          微信
+        </div>
+      </div>
+      <div class="donate-box_img">
+        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
+          <img src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
+        </div> 
+        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
+          <img src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
+        </div>
+      </div>
+    </div>
+  </transition>
 </div>
 
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDonate',
+    data: {
+      visible: false,
+      tabActive: 'Alipay',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        // function getScroll() {
+        //   return {
+        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        //   };
+        // }
+        this.top = $(document).scrollTop() // or getScroll().top
+        // console.log('aa', $('.main-content'));
+        body.style.cssText = 'overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+      changeTabActive(name) {
+        this.tabActive = name;
+      }
+    },
+    created() {}
+  })
+</script>
+    
 
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2023/08/06/mu-lu/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            目录相关操作获取当前工作目录
-我们可以调用库函数 getcwd 获取当前工作目录的绝对路径：
-12345678#include &lt;unistd.h&gt;char *getcwd(char *buf, size_t size);参数 
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2023/08/06/mu-lu/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2023/08/06/mu-lu/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      <div id="gitment-container"></div>
+
+    
+  </div>
+
+<!-- comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
   
     
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2023-08-06</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2023/08/06/bian-yi-gong-ju-lian/">编译工具链</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gcc-gdb/" rel="tag">gcc,gdb</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2023/08/06/bian-yi-gong-ju-lian/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            前面我们写程序的时候用的都是集成开发环境 (IDE: Integrated DevelopmentEnvironment)，集成开发环境可以极大地方便我们程序员编写程序，但是配置起来也相对麻烦。在 Linux 环境下，我们用的是编译工具链，
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2023/08/06/bian-yi-gong-ju-lian/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2023/08/06/bian-yi-gong-ju-lian/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
+      <section class="widget side_blogger">
+  <div class='content'>
     
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2023-07-28</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/2023/07/28/linux-ming-ling/">Linux常用命令</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/" rel="tag">Linux</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/Linux/">Linux</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/2023/07/28/linux-ming-ling/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            常见命令查看帮助手册
-使用 man(manual) 命令可以查看 Linux 内置的帮助手册。该手册分为多卷：第一卷是用来查看 shell 命令的；第二卷是用来查看系统调用相关信息的；第三卷是用来查看库函数信息的…
-1234567891  
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/2023/07/28/linux-ming-ling/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/2023/07/28/linux-ming-ling/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
         </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>mitPosso</h2>
+        
+        
+          <p>我是副标题</p>
+
+        
+        
+          <p><span id="jinrishici-sentence">木亶</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
       </div>
-    </article>
-  
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:me@xxx.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/yuang01/hexo-theme-bamboo"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=你的qq号码"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
 </section>
-</div>
-<div class="w-70">
+
+    
   
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E5%B8%AE%E5%8A%A9%E6%89%8B%E5%86%8C"><span class="toc-text">阅读帮助手册</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#name"><span class="toc-text">name</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E"><span class="toc-text">声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="toc-text">返回值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-text">描述</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%97%A0%E7%BC%93%E5%86%B2%E7%9A%84%E6%96%87%E4%BB%B6IO"><span class="toc-text">无缓冲的文件IO</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#fopen"><span class="toc-text">fopen</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6"><span class="toc-text">文件描述符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#open-close"><span class="toc-text">open close</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6-1"><span class="toc-text">文件描述符</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%A6%81%E6%B1%82"><span class="toc-text">使用要求</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#read%E5%92%8Cwrite"><span class="toc-text">read和write</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6"><span class="toc-text">文本文件 二进制文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6%E4%B8%AA%E8%AF%BB%E5%86%99%E7%9A%84%E5%87%BD%E6%95%B0"><span class="toc-text">6个读写的函数</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%9A%84%E8%AF%BB%E6%93%8D%E4%BD%9C"><span class="toc-text">二进制的读操作</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B1%E5%85%A5read"><span class="toc-text">深入read</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#read%E8%AE%BE%E5%A4%87%E6%96%87%E4%BB%B6"><span class="toc-text">read设备文件</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#read-write-%E5%AE%9E%E7%8E%B0%E4%B8%80%E4%B8%AAcp%E5%91%BD%E4%BB%A4"><span class="toc-text">read write 实现一个cp命令</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lseek-%E6%9B%B4%E6%94%B9%E5%81%8F%E7%A7%BB%E9%87%8F"><span class="toc-text">lseek 更改偏移量</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9B%B4%E6%94%B9%E6%96%87%E4%BB%B6%E5%A4%A7%E5%B0%8F"><span class="toc-text">更改文件大小</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%A9%BA%E6%B4%9E"><span class="toc-text">文件空洞</span></a></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/08/06/wen-jian-xi-tong/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-06</span>
+                
+              </div>
+              <a class="post-title" href="/2023/08/06/wen-jian-xi-tong/">文件系统</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/08/06/wen-jian/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-06</span>
+                
+              </div>
+              <a class="post-title" href="/2023/08/06/wen-jian/">文件</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/08/06/mu-lu/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-06</span>
+                
+              </div>
+              <a class="post-title" href="/2023/08/06/mu-lu/">目录</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/08/06/bian-yi-gong-ju-lian/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">08-06</span>
+                
+              </div>
+              <a class="post-title" href="/2023/08/06/bian-yi-gong-ju-lian/">编译工具链</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2023/07/28/vim/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">07-28</span>
+                
+              </div>
+              <a class="post-title" href="/2023/07/28/vim/">Vim常用操作</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
 
       </main>
     </div>

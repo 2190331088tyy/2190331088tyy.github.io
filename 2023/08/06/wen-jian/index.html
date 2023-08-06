@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>友情链接 | 木亶</title>
+  <title>文件 | 木亶</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -549,17 +549,36 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        friends
+        文件
       </span>
     </div>
     
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2023-08-06 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/c/" class="post-detail-header_category">
+              c
+            </a>
+          
+        </span>
+      
+
+      
     
   </div>
   
@@ -577,9 +596,202 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        
+        <h1 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h1><h2 id="流"><a href="#流" class="headerlink" title="流"></a>流</h2><p>在 C 语言中，<strong>流</strong> (stream) 表示任意输入的源或任意输出的目的地。流是一个抽象的概念，它即可以表示存储硬盘上的文件，也可以表示网络端口或者打印设备。流这个概念可以很好地屏蔽硬件设备之间的差异，使得 C 语言可以像读写文件一样读写任意的设备。</p>
+<h3 id="文件缓冲"><a href="#文件缓冲" class="headerlink" title="文件缓冲"></a>文件缓冲</h3><p>缓冲区是以<strong>先进先出</strong>的方式管理数据的。缓冲区分为三种类型：</p>
+<ul>
+<li>满缓冲。当缓冲区空时，从输入流中读取数据；当缓冲区满时，向输出流中写入数据。</li>
+<li>行缓冲。每次从输入流中读取一行数据；每次向输出流中写入一行数据 (stdin,stdout)。</li>
+<li>无缓冲。顾名思义，就是没有缓冲区 (stderr)。</li>
+</ul>
+<h3 id="标准流"><a href="#标准流" class="headerlink" title="标准流"></a>标准流</h3><p>C 语言对流的访问是通过<strong>文件指针</strong>实现的，它的类型为 FILE* 。并且在 &lt;stdio.h&gt; 头文件中提供了 3 个标准流。这 3 个标准流可以直接使用——我们不需要对其进行声明，也不用打开或者关闭它们。</p>
+<h3 id="文本文件和二进制文件"><a href="#文本文件和二进制文件" class="headerlink" title="文本文件和二进制文件"></a>文本文件和二进制文件</h3><p>C 语言支持两种类型的文件：文本文件和二进制文件。文本文件中存储的是字符数据，人类是可以看懂的；二进制文件中的数据，人类是看不懂的。</p>
+<p>文本文件具有两个独特的性质：</p>
+<ul>
+<li><strong>文本文件有行的概念</strong>。文本文件被划分为若干行，并且每一行的结尾都以特殊字符进行标记。在 Windows 系统中，是以回车符和换行符 (\r\n) 进行标记的；在 Unix和 Macintosh 系统中是以换行符 (\n) 标记的。早期的 Macintosh 是以回车符 (\r) 标记每一行的结尾的。</li>
+<li><strong>文本文件可能包含一个特殊的</strong> “<strong>文件末尾</strong>“ <strong>标记</strong>。一些操作系统允许在文本文件的末尾使用一个特殊的字节作为标记。在 Windows 系统中，这个标记为 ‘\x1a’(Ctrl+Z)。Ctrl+Z不是必需的，但如果存在，它就标志着文件的结束，其后的所有字节都会被忽略。大多数其他操作系统 (包括 UNIX) 是没有文件末尾字符。使用 Ctrl+Z 的这一习惯继承自 DOS，而 DOS 中的这一习惯又是从 CP&#x2F;M (早期用于个人电脑的一种操作系统) 来的。</li>
+</ul>
+<p>文本形式可以方便人类阅读和编辑；二进制形式可以节省空间，并且转换效率高。</p>
+<h2 id="打开-关闭文件"><a href="#打开-关闭文件" class="headerlink" title="打开&#x2F;关闭文件"></a>打开&#x2F;关闭文件</h2><h3 id="fopen"><a href="#fopen" class="headerlink" title="fopen"></a>fopen</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FILE* fopen(const char* filename, const char* mode);</span><br><span class="line">#第一个参数是文件路径，第二个参数是打开文件的模式。如果文件无法打开，返回空指针。</span><br></pre></td></tr></table></figure>
+
+<p><strong>文件路径</strong></p>
+<p>绝对路径：从根目录 (或者盘符) 开始，一直到文件所在的位置，比如：”c:&#x2F;project&#x2F;test.dat”。相对路径：从当前工作目录开始，一直到文件所在的位置，比如：”in.dat”。</p>
+<p><strong>模式</strong></p>
+<p>文本形式：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>模式字符串</strong></th>
+<th align="center"><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">“r”</td>
+<td align="center">打开文件用于读</td>
+</tr>
+<tr>
+<td align="center">“w”</td>
+<td align="center">打开文件用于写 (文件不存在则创建)</td>
+</tr>
+<tr>
+<td align="center">“a”</td>
+<td align="center">打开文件用于追加 (文件不存在则创建)</td>
+</tr>
+<tr>
+<td align="center">“r+”</td>
+<td align="center">打开文件用于读和写，从文件头开始</td>
+</tr>
+<tr>
+<td align="center">“w+”</td>
+<td align="center">打开文件用于读和写 (文件不存在则创建)</td>
+</tr>
+<tr>
+<td align="center">“a+”</td>
+<td align="center">打开文件用于读和写 (文件不存在则创建)</td>
+</tr>
+</tbody></table>
+<p>二进制打开：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>模式字符串</strong></th>
+<th align="center"><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">“rb”</td>
+<td align="center">打开文件用于读</td>
+</tr>
+<tr>
+<td align="center">“wb”</td>
+<td align="center">打开文件用于写 (文件不存在则创建)</td>
+</tr>
+<tr>
+<td align="center">“ab”</td>
+<td align="center">打开文件用于追加 (文件不存在则创建)</td>
+</tr>
+<tr>
+<td align="center">“r+b” 或 “rb+”</td>
+<td align="center">打开文件用于读和写，从文件头开始</td>
+</tr>
+<tr>
+<td align="center">“w+b” 或 “wb+”</td>
+<td align="center">打开文件用于读和写 (文件不存在则创建)</td>
+</tr>
+<tr>
+<td align="center">“a+b” 或 “ab+”</td>
+<td align="center">打开文件用于读和写 (文件不存在则创建)</td>
+</tr>
+</tbody></table>
+<p>写模式和追加模式是不一样的。如果文件存在，写模式会清空原有的数据，而追加模式会在原有数据的后面写入新的内容。</p>
+<h3 id="fclose"><a href="#fclose" class="headerlink" title="fclose"></a>fclose</h3><p>fclose 可以关闭程序不再使用的文件。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int fclose(FILE* stream);</span><br></pre></td></tr></table></figure>
+
+<p>如果成功关闭， fclose 返回零；否则返回 EOF。</p>
+<p>注意：当不再使用某个文件时，一定要及时关闭该文件。</p>
+<h2 id="读-写文件"><a href="#读-写文件" class="headerlink" title="读&#x2F;写文件"></a>读&#x2F;写文件</h2><p>前面介绍了如何打开和关闭文件，接下来我们来学习下如何读写文件。其中fgetc&#x2F;fputc , fgets&#x2F;fputs 和 fscanf&#x2F;fprintf 是用来读写文本文件的；fread&#x2F;fwrite 是用来读写二进制文件的。</p>
+<h3 id="fgetc-fputc"><a href="#fgetc-fputc" class="headerlink" title="fgetc&amp;fputc"></a>fgetc&amp;fputc</h3><p><strong>fgetc</strong></p>
+<p>fgetc 可以从输入流中读取一个字符，如果读取成功，返回读取的字符；如果读到文件末尾，或者读取失败，返回 EOF。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int fgetc(FILE* stream);</span><br></pre></td></tr></table></figure>
+
+<p>fgetc 和 getchar 类似。不同的是 getchar 只能从标准输入流(stdin)中读取字符，而 fgetc 可以从任意一个输入流中读取字符。</p>
+<p><strong>fputc</strong></p>
+<p>fputc 可以向输出流中写入一个字符，如果写入成功，返回写入的字符；如果写入失败，返回EOF。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int fputc(int c, FILE* stream);</span><br></pre></td></tr></table></figure>
+
+<p>fputc 和 putchar 类似。不同的是 putchar 只能向标准输出流(stdout)中写入字符，而 fputc 可以向任意一个流中写入字符。</p>
+<p><strong>示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">// fcopy.c</span><br><span class="line">int main(int argc, char** argv) &#123;</span><br><span class="line">    // copy src dest</span><br><span class="line"> if (argc != 3) &#123;</span><br><span class="line"> printf(&quot;Error: invalid arguments\n&quot;);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line">    </span><br><span class="line"> // 打开文件流</span><br><span class="line"> FILE* source_fp = fopen(argv[1], &quot;r&quot;);</span><br><span class="line"> if (source_fp == NULL) &#123;</span><br><span class="line"> printf(&quot;Cannot open %s\n&quot;, argv[1]);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line"> FILE* dest_fp = fopen(argv[2], &quot;w&quot;);</span><br><span class="line"> if (dest_fp == NULL) &#123;</span><br><span class="line"> printf(&quot;Cannot open %s\n&quot;, argv[2]);</span><br><span class="line"> fclose(source_fp);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line">    </span><br><span class="line"> // 复制文件</span><br><span class="line"> int c;</span><br><span class="line"> while ((c = fgetc(source_fp)) != EOF)</span><br><span class="line"> fputc(c, dest_fp);</span><br><span class="line"> </span><br><span class="line">    // 关闭文件流</span><br><span class="line"> fclose(source_fp);</span><br><span class="line"> fclose(dest_fp);</span><br><span class="line"> return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="fgets-fputs"><a href="#fgets-fputs" class="headerlink" title="fgets&amp;fputs"></a>fgets&amp;fputs</h3><p>一次性可以读写一行的函数 fgets 和 fputs 。</p>
+<p><strong>fgets</strong></p>
+<p>从输入流 stream 中，最多读取 count - 1 个字符，并把读取的字符存入 str 指向的字符数组中。 fgets 遇到换行符’\n’，或者文件的末尾就会终止(也就是说，读取的字符数可能不足 count - 1 个)，并且会存储换行符’\n’。 fgets 会在最后添加空字符’\0’。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">char* fgets(char* str, int count, FILE* stream);</span><br><span class="line">参数：</span><br><span class="line">    str: 指向一个字符数组</span><br><span class="line">    count: 能够写入的最大字符数量(通常是str指向字符数组的长度)</span><br><span class="line">    stream: 输入流</span><br><span class="line">返回值：</span><br><span class="line"> 成功：返回str</span><br><span class="line">    失败：NULL</span><br></pre></td></tr></table></figure>
+
+<p>fgets 是 gets 的通用版本，它可以从任意输入流中读取数据，而 gets 只能从stdin 中读取数据。 fgets 也比 gets 更为安全，因为它限制了读取字符的最大数目(count - 1)。此外，如果 fgets 是因为读取了换行符而终止，那么它会存储换行符’\n’，而 gets 函数从来不会存储换行符。</p>
+<p><strong>fputs</strong></p>
+<p>将 str 指向的字符串，写入输出流 stream 中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">int fputs(const char* str, FILE* stream);</span><br><span class="line">参数：</span><br><span class="line">    str: 要写的字符串(以&#x27;\0&#x27;结尾的字符串)</span><br><span class="line">    stream: 输出流</span><br><span class="line">返回值：</span><br><span class="line">    成功：返回一个非负值。</span><br><span class="line">    失败：返回EOF，并设置errno。</span><br></pre></td></tr></table></figure>
+
+<p>fputs 是 puts 的通用版本，它可以将字符串写入到任意的输出流中，而 puts 只能写入到 stdout 中。此外， fputs 是原样输出字符串，而 puts 会在字符串后面而外输出一个换行符’\n’。</p>
+<p><strong>示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">// fcopy.c</span><br><span class="line">int main(int argc, char** argv) &#123;</span><br><span class="line">    // copy src dest</span><br><span class="line"> if (argc != 3) &#123;</span><br><span class="line">3 . 3 f s c anf &amp; fprintf</span><br><span class="line">fscanf</span><br><span class="line">fscanf 和 scanf 类似，是用来进行格式化输入的。</span><br><span class="line">不同的是， scanf 是从标准输入(stdin)中读取数据，而 fscanf 可以从任何一个流</span><br><span class="line">中读取数据。也就是说，当 fscanf 的第一个参数为 stdin 时，它的效果等价于</span><br><span class="line">scanf 。</span><br><span class="line"> printf(&quot;Error: invalid arguments\n&quot;);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line">    </span><br><span class="line"> // 打开文件流</span><br><span class="line"> FILE* source_fp = fopen(argv[1], &quot;r&quot;);</span><br><span class="line"> if (source_fp == NULL) &#123;</span><br><span class="line"> printf(&quot;Cannot open %s\n&quot;, argv[1]);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line"> FILE* dest_fp = fopen(argv[2], &quot;w&quot;);</span><br><span class="line"> if (dest_fp == NULL) &#123;</span><br><span class="line"> printf(&quot;Cannot open %s\n&quot;, argv[2]);</span><br><span class="line"> fclose(source_fp);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line">    </span><br><span class="line"> // 复制文件</span><br><span class="line"> char str[1024];</span><br><span class="line"> while (fgets(str, sizeof(str), source_fp) != NULL)</span><br><span class="line"> fputs(str, dest_fp);</span><br><span class="line"> </span><br><span class="line">    // 关闭文件流</span><br><span class="line"> fclose(source_fp);</span><br><span class="line"> fclose(dest_fp);</span><br><span class="line"> return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="fscanf-fprintf"><a href="#fscanf-fprintf" class="headerlink" title="fscanf&amp;fprintf"></a>fscanf&amp;fprintf</h3><p><strong>fscanf</strong></p>
+<p>fscanf 和 scanf 类似，是用来进行格式化输入的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int fscanf(FILE* stream, const char* format, ...);</span><br></pre></td></tr></table></figure>
+
+<p>不同的是， scanf 是从标准输入(stdin)中读取数据，而 fscanf 可以从任何一个流中读取数据。也就是说，当 fscanf 的第一个参数为 stdin 时，它的效果等价于scanf 。顺便提一下， sscanf 可以从字符串中读取数据。</p>
+<p><strong>fprintf</strong></p>
+<p>fprintf 和 printf 类似，是用来进行格式化输出的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int fprintf(FILE* stream, const char* format, ...);</span><br></pre></td></tr></table></figure>
+
+<p>不同的是， printf 始终是向标准输出(stdout)写入内容的，而 fprintf 可以向任何一个输出流中写入内容。也就是说，当 fprintf 的第一个参数为 stdout 时，它的效果等价于 printf 。</p>
+<p>顺便提一下， sprintf 可以将内容写入到一个字符数组中。</p>
+<p>格式化输入输出，可以用于序列化和反序列化过程中。所谓<strong>序列化</strong>，就是将程序中的对象转换成一种可以保存的格式(二进制或文本)，从而方便存储(存储到文件或数据库中)或传输(通过网络传输给另一台机器)。<strong>反序列化</strong>则是序列化的逆过程，它将按一定格式存储的数据转换成程序中的对象。</p>
+<p><strong>示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">typedef struct&#123;</span><br><span class="line"> char name[25];</span><br><span class="line"> int age;</span><br><span class="line"> char gender;</span><br><span class="line">&#125;Student_t;</span><br><span class="line">int main(int argc, char** argv) &#123;</span><br><span class="line"> if (argc != 2) &#123;</span><br><span class="line"> printf(&quot;Error: invalid arguments\n&quot;);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line"> Student_t s = &#123; &quot;xixi&quot;, 18, &#x27;f&#x27; &#125;;</span><br><span class="line"> FILE* fp = fopen(argv[1], &quot;w&quot;);</span><br><span class="line"> if (fp == NULL) &#123;</span><br><span class="line"> printf(&quot;Cannot open %s\n&quot;, argv[1]);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line">    // 序列化</span><br><span class="line"> fprintf(fp, &quot;%s %d %c&quot;, s.name, s.age, s.gender);</span><br><span class="line"> fclose(fp);</span><br><span class="line"> fp = fopen(argv[1], &quot;r&quot;);</span><br><span class="line"> if (fp == NULL) &#123;</span><br><span class="line">3 . 4 fr e ad &amp; f writ e</span><br><span class="line">fread 和 fwrite 主要是用来处理二进制文件的。 fread 可以每次读取一大块数</span><br><span class="line">据， fwrite 可以每次写入一大块数据。</span><br><span class="line">fread 从输入流 stream 中，最多读取 count 个元素，并把它们依次存放到 buffer 指</span><br><span class="line">向的数组中。</span><br><span class="line">fwrite 将存放在 buffer 指向的数组中的 count 个元素写入到输出流 stream 中。</span><br><span class="line"> printf(&quot;Cannot open %s\n&quot;, argv[1]);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line"> Student_t t;</span><br><span class="line">    // 反序列化</span><br><span class="line"> fscanf(fp, &quot;%s %d %c&quot;, t.name, &amp;t.age, &amp;t.gender);</span><br><span class="line"> fclose(fp);</span><br><span class="line"> return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="fread-frwrite"><a href="#fread-frwrite" class="headerlink" title="fread&amp;frwrite"></a>fread&amp;frwrite</h3><p>fread 和 fwrite 主要是用来处理二进制文件的。 fread 可以每次读取一大块数据， fwrite 可以每次写入一大块数据。</p>
+<p>fread 从输入流 stream 中，最多读取 count 个元素，并把它们依次存放到 buffer 指向的数组中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">size_t fread(void* buffer, size_t size, size_t count, FILE* stream);</span><br><span class="line">参数：</span><br><span class="line">    buffer: 指向存放数据的数组</span><br><span class="line">    size: 每个元素的大小(以字节为单位)</span><br><span class="line">    count: 最多可以读取的元素个数</span><br><span class="line">    stream: 输入流</span><br><span class="line">返回值：</span><br><span class="line">    成功读取元素的个数。当读到文件末尾，或者发生错误时，返回值可能小于count。</span><br><span class="line">    我们可以通过feof和ferror函数来判断，到底是读到了文件末尾，还是发生了错误。</span><br></pre></td></tr></table></figure>
+
+<p>fwrite 将存放在 buffer 指向的数组中的 count 个元素写入到输出流 stream 中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">size_t fwrite(const void* buffer, size_t size, size_t count, FILE*</span><br><span class="line">stream);</span><br><span class="line">参数：</span><br><span class="line"> buffer: 指向存放数据的数组。</span><br><span class="line">返回值：</span><br><span class="line"> 成功写入元素的个数。当发生错误时，这个值可能小于count。</span><br></pre></td></tr></table></figure>
+
+<p>fread&#x2F;fwrite 不仅可以用于读写二进制文件，还可以用于序列化和反序列化过程中。</p>
+<p><strong>示例</strong>1 (复制二进制文件)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">// fcopy.c</span><br><span class="line">int main(int argc, char** argv) &#123;</span><br><span class="line"> if (argc != 3) &#123;</span><br><span class="line"> printf(&quot;Error: invalid arguments\n&quot;);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line"> FILE* source_fp = fopen(argv[1], &quot;rb&quot;);</span><br><span class="line"> if (source_fp == NULL) &#123;</span><br><span class="line"> printf(&quot;Cannot open %s\n&quot;, argv[1]);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line"> FILE* dest_fp = fopen(argv[2], &quot;wb&quot;);</span><br><span class="line"> if (dest_fp == NULL) &#123;</span><br><span class="line"> printf(&quot;Cannot open %s\n&quot;, argv[2]);</span><br><span class="line"> fclose(source_fp);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line"> // 复制二进制文件</span><br><span class="line"> char buffer[1024];</span><br><span class="line"> int n;</span><br><span class="line"> while ((n = fread(buffer, 1, sizeof(buffer), source_fp)) != 0)</span><br><span class="line"> fwrite(buffer, 1, n, dest_fp);</span><br><span class="line"> fclose(source_fp);</span><br><span class="line"> fclose(dest_fp);</span><br><span class="line"> return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例</strong>2 (序列化&#x2F;反序列化)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">typedef struct&#123;</span><br><span class="line"> char name[25];</span><br><span class="line"> int age;</span><br><span class="line"> char gender;</span><br><span class="line">&#125;Student_t;</span><br><span class="line">4 . 文件定位</span><br><span class="line">每个流都有相关联的文件位置。在执行读写操作时，文件位置会自动推进，并按照顺</span><br><span class="line">序访问文件。顺序访问是很好的，但是有时候，我们可能需要跳跃地访问文件。为</span><br><span class="line">此，&lt;stdio.h&gt; 提供了几个函数来支持这种能力：</span><br><span class="line">int main(int argc, char** argv) &#123;</span><br><span class="line"> if (argc != 2) &#123;</span><br><span class="line"> printf(&quot;Error: invalid arguments\n&quot;);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line"> Student_t s = &#123; &quot;xixi&quot;, 18, &#x27;f&#x27; &#125;;</span><br><span class="line"> FILE* fp = fopen(argv[1], &quot;wb&quot;);</span><br><span class="line"> if (fp == NULL) &#123;</span><br><span class="line"> printf(&quot;Cannot open %s\n&quot;, argv[1]);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line">    // 序列化</span><br><span class="line"> fwrite(&amp;s, sizeof(Student_s), 1, fp);</span><br><span class="line"> fclose(fp);</span><br><span class="line"> fp = fopen(argv[1], &quot;rb&quot;);</span><br><span class="line"> if (fp == NULL) &#123;</span><br><span class="line"> printf(&quot;Cannot open %s\n&quot;, argv[1]);</span><br><span class="line"> exit(EXIT_FAILURE);</span><br><span class="line"> &#125;</span><br><span class="line"> Student_t t;</span><br><span class="line">    // 反序列化</span><br><span class="line"> fread(&amp;t, sizeof(Student_s), 1, fp);</span><br><span class="line"> fclose(fp);</span><br><span class="line"> return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="文件定位"><a href="#文件定位" class="headerlink" title="文件定位"></a>文件定位</h2><p>每个流都有相关联的文件位置。在执行读写操作时，文件位置会自动推进，并按照顺序访问文件。顺序访问是很好的，但是有时候，我们可能需要跳跃地访问文件。为此，&lt;stdio.h&gt; 提供了几个函数来支持这种能力：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int fseek(FILE* stream, long int offset, int whence);</span><br><span class="line">long int ftell(FILE* stream);</span><br><span class="line">void rewind(FILE* stream);</span><br></pre></td></tr></table></figure>
+
+<p><strong>fseek</strong></p>
+<p>fseek 可以改变与 stream 相关联的文件位置。其中 whence 表示参照点，参照点有3 个选择：</p>
+<p>SEEK_SET：文件的起始位置。</p>
+<p>SEEK_CUR：文件的当前位置。</p>
+<p>SEEK_END：文件的末尾位置。</p>
+<p>offset 表示偏移量 (可能为负)，它是以字节进行计数的。比如：移动到文件的起始位置，可以这样写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fseek(fp, 0L, SEEK_SET);</span><br></pre></td></tr></table></figure>
+
+<p>移动到文件的末尾，可以这样写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fseek(fp, 0L, SEEK_END);</span><br></pre></td></tr></table></figure>
+
+<p>往回移动 10 个字节，可以这样写：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fseek(fp, -10L, SEEK_CUR);</span><br></pre></td></tr></table></figure>
+
+<p>通常情况下， fseek 会返回 0；如果发生错误 (比如，请求的位置不存在)，那么fseek 会返回非 0 值。</p>
+<p><strong>ftell</strong></p>
+<p>ftell 以长整数形式返回当前文件位置；如果发生错误， ftell 返回 -1L。 ftell一般的用法是：记录当前位置，方便以后返回。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">long int filePos = ftell(fp);</span><br><span class="line">...</span><br><span class="line">fseek(fp, filePos, SEEK_SET);</span><br></pre></td></tr></table></figure>
+
+<p><strong>rewind</strong></p>
+<p>rewind 会将文件位置设置为起始位置，类似于调用：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fseek(fp, 0L, SEEK_SET);</span><br></pre></td></tr></table></figure>
+
+<p><strong>课堂小练习</strong></p>
+<p>用户输入文件名，将整个文件的内容读入到字符数组中，并在后面添加空字符’\0’。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char* readFile(const char* path);</span><br></pre></td></tr></table></figure>
+
+<h2 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h2><p>错误的检测和处理并不是 C 语言的强项，C 语言没有其它高级语言 (C++, Java, C#等) 所具有的异常处理机制。C 语言往往是通过函数的返回值，或者是测试 errno 变量来检测错误的；并且需要程序员自己编写代码来处理错误。</p>
+<h3 id="errno"><a href="#errno" class="headerlink" title="errno"></a>errno</h3><p>errno 是一个 int 类型的全局变量 (C11 修改为线程本地变量，即每个线程都有一个独有的 errno 变量)，它定义在 &lt;errno.h&gt; 头文件中。标准库中有些函数 (比如与文件相关的一些函数)，如果在调用过程中发生了错误，它会设置 errno 的值，以表明发生了何种类型的错误。</p>
+<p>程序启动时，会将 errno 的值设为 0，表示没有错误发生。其它非 0 值都表示发生了某种类型的错误。我们可以通过 perror 和 strerror 来显示错误信息。其中，perror 定义在 &lt;stdio.h&gt; 头文件中， strerror 定义在 &lt;string.h&gt; 头文件中。</p>
+<p><strong>示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// error.c</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line">#include &lt;errno.h&gt;</span><br><span class="line">int main(void) &#123;</span><br><span class="line">    printf(&quot;%d\n&quot;, errno);</span><br><span class="line">    FILE* fp = fopen(&quot;not_exist.txt&quot;, &quot;r&quot;);</span><br><span class="line">    printf(&quot;%d\n&quot;, errno);</span><br><span class="line">    printf(&quot;%s\n&quot;, strerror(errno));</span><br><span class="line">    if(errno != 0) &#123;</span><br><span class="line">        perror(&quot;not_exist.txt&quot;);</span><br><span class="line">   &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       </div>
       <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/%E6%96%87%E4%BB%B6/" class="">
+              文件
+            </a>
+          
+        </div>
         
       </div>
       
@@ -590,7 +802,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/friends/index.html" target="_blank" title="friends">http://example.com/friends/index.html</a>
+    <a href="/2023/08/06/wen-jian/" target="_blank" title="文件">http://example.com/2023/08/06/wen-jian/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -608,7 +820,51 @@
 
 
 
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/2023/08/06/wen-jian-xi-tong/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> 上一篇:
+        <div class="title-text">文件系统</div>
+      </div>
+      
+      <!-- <div class="content">
+        阅读帮助手册name声明
+函数调用内存模型
 
+指针类型的参数
+
+指针参数使用问题
+
+返回值出错的条件–&gt;errno
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2023/08/06/mu-lu/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">目录</div>
+      </div>
+      <!-- <div class="content">
+        目录相关操作获取当前工作目录
+我们可以调用库函数 getcwd 获取当前工作目录的绝对路径：
+12345678#incl
+      </div> -->
+    </a>
+  </div>
 
 </div>
 
@@ -814,58 +1070,29 @@
   <div class="layout_sticky">    
     
       
-        
-    <section class="widget side_category">
-      
+<section class="widget side_toc">
+  
   <header>
     
-      <a style="color: " href='/blog/categories/'><i class="fas fa-folder-open fa-fw" aria-hidden="true"></i><span class='name'>文章分类</span></a>
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
     
   </header>
 
 
-      <div class='content'>
-        <ul class="entry navigation">
-          
-            <li><a class="flat-box"
-              title="/categories/Linux/" href="/categories/Linux/"
-              id="categoriesLinux"
-              ><div class='name'>Linux</div><div class='badge'>(4)</div></a></li>
-          
-            <li><a class="flat-box"
-              title="/categories/c/" href="/categories/c/"
-              id="categoriesc"
-              ><div class='name'>c</div><div class='badge'>(1)</div></a></li>
-          
-            <li><a class="flat-box"
-              title="/categories/vim/" href="/categories/vim/"
-              id="categoriesvim"
-              ><div class='name'>vim</div><div class='badge'>(1)</div></a></li>
-          
-        </ul>
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6"><span class="toc-text">文件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%81"><span class="toc-text">流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%BC%93%E5%86%B2"><span class="toc-text">文件缓冲</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E6%B5%81"><span class="toc-text">标准流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6%E5%92%8C%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%96%87%E4%BB%B6"><span class="toc-text">文本文件和二进制文件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%93%E5%BC%80-%E5%85%B3%E9%97%AD%E6%96%87%E4%BB%B6"><span class="toc-text">打开&#x2F;关闭文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#fopen"><span class="toc-text">fopen</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fclose"><span class="toc-text">fclose</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%BB-%E5%86%99%E6%96%87%E4%BB%B6"><span class="toc-text">读&#x2F;写文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#fgetc-fputc"><span class="toc-text">fgetc&amp;fputc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fgets-fputs"><span class="toc-text">fgets&amp;fputs</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fscanf-fprintf"><span class="toc-text">fscanf&amp;fprintf</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#fread-frwrite"><span class="toc-text">fread&amp;frwrite</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E5%AE%9A%E4%BD%8D"><span class="toc-text">文件定位</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-text">错误处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#errno"><span class="toc-text">errno</span></a></li></ol></li></ol></li></ol> -->
+        <div class="toc"></div>
       </div>
-    </section>
-  
-  
-      
-      
-        
-<section class="widget side_tagcloud">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-    <a href="/tags/Linux/" style="font-size: 14px; color: #999">Linux</a> <a href="/tags/Linux-%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/" style="font-size: 14px; color: #999">Linux,文件系统</a> <a href="/tags/Linux-%E7%9B%AE%E5%BD%95/" style="font-size: 14px; color: #999">Linux,目录</a> <a href="/tags/gcc-gdb/" style="font-size: 14px; color: #999">gcc,gdb</a> <a href="/tags/vim/" style="font-size: 14px; color: #999">vim</a> <a href="/tags/%E6%96%87%E4%BB%B6/" style="font-size: 14px; color: #999">文件</a>
     </div>
+  </div>
 </section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
 
-  
-      
       
   <section class="widget side_recent_post">
     
@@ -991,129 +1218,6 @@
     </div>
   </section>
 
-      
-  <section class="widget side_archives">
-    
-    <header><a style="color: red" href='/archives/'><i class="fas fa-archive fa-fw" aria-hidden="true"></i><span class='name'>归档</span></a></header><div class="content"><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/08/"><span class="card-archive-list-date">八月 2023</span><span class="card-archive-list-count">4</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">七月 2023</span><span class="card-archive-list-count">3</span></a></li></ul></div>
-  </section>
-
-      <section class="widget side_webinfo">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-chart-line fa-fw" aria-hidden="true"></i><span class='name' style="color: ">站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>7 篇</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>已运行时间：</div>
-          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
-        </div>
-        <script>
-          var BirthDay = new Date(new Date('2020/01/01'));
-          var today = new Date();
-          var timeold = (today.getTime() - BirthDay.getTime());
-          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
-          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
-        </script>
-      
-
-
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站访客数：</div>
-          
-          <div><span id="busuanzi_value_site_uv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 人</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站总访问量：</div>
-          
-          <div><span id="busuanzi_value_site_pv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 次</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          
-            <div id="last-update" style="display: none;">Sun Aug 06 2023 22:50:43 GMT+0800 (GMT+08:00)</div>
-            <div id="last-update-show">2023-08-06 日</div>
-          
-        </div>
-        
-        <script>
-          function timeago(dateTimeStamp) {
-              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
-              var hour = minute * 60;
-              var day = hour * 24;
-              var week = day * 7;
-              var month = day * 30;
-              var now = new Date().getTime(); //获取当前时间毫秒
-              var diffValue = now - dateTimeStamp; //时间差
-              if (diffValue < 0) {
-                  return;
-              }
-              var minC = diffValue / minute; //计算时间差的分，时，天，周，月
-              var hourC = diffValue / hour;
-              var dayC = diffValue / day;
-              var weekC = diffValue / week;
-              var monthC = diffValue / month;
-              if (monthC >= 1 && monthC <= 3) {
-                  result = " " + parseInt(monthC) + " 月前"
-              } else if (weekC >= 1 && weekC <= 3) {
-                  result = " " + parseInt(weekC) + " 周前"
-              } else if (dayC >= 1 && dayC <= 6) {
-                  result = " " + parseInt(dayC) + " 天前"
-              } else if (hourC >= 1 && hourC <= 23) {
-                  result = " " + parseInt(hourC) + " 小时前"
-              } else if (minC >= 1 && minC <= 59) {
-                  result = " " + parseInt(minC) + " 分钟前"
-              } else if (diffValue >= 0 && diffValue <= minute) {
-                  result = "刚刚"
-              } else {
-                  var datetime = new Date();
-                  datetime.setTime(dateTimeStamp);
-                  var Nyear = datetime.getFullYear();
-                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
-                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
-                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
-                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
-                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
-                  result = Nyear + "-" + Nmonth + "-" + Ndate
-              }
-              return result;
-          }
-          var lastUpDate = document.getElementById('last-update').innerHTML;
-          try {
-            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
-          } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2023-08-06 日';
-          }
-        </script>
-        
-      
-    </div>
-  </div>
-</section>
-      
     
   </div>
 </aside>
